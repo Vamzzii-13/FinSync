@@ -6,7 +6,9 @@ import {
   type Invoice,
   type InsertInvoice,
   type UploadedFile,
-  type InsertUploadedFile
+  type InsertUploadedFile,
+  type DownloadHistory,
+  type InsertDownloadHistory
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -31,6 +33,10 @@ export interface IStorage {
   getUploadedFiles(userId: string): Promise<UploadedFile[]>;
   createUploadedFile(file: InsertUploadedFile & { userId: string }): Promise<UploadedFile>;
   updateUploadedFile(id: string, updates: Partial<UploadedFile>): Promise<UploadedFile | undefined>;
+
+  // Download history operations
+  getDownloadHistory(userId: string): Promise<DownloadHistory[]>;
+  createDownloadHistory(download: InsertDownloadHistory & { userId: string }): Promise<DownloadHistory>;
 }
 
 export class MemStorage implements IStorage {
@@ -38,6 +44,7 @@ export class MemStorage implements IStorage {
   private gstReturns: Map<string, GstReturn> = new Map();
   private invoices: Map<string, Invoice> = new Map();
   private uploadedFiles: Map<string, UploadedFile> = new Map();
+  private downloadHistory: Map<string, DownloadHistory> = new Map();
 
   constructor() {
     this.initializeSampleData();
@@ -220,6 +227,32 @@ export class MemStorage implements IStorage {
     const updatedFile = { ...file, ...updates };
     this.uploadedFiles.set(id, updatedFile);
     return updatedFile;
+  }
+
+  async getDownloadHistory(userId: string): Promise<DownloadHistory[]> {
+    return Array.from(this.downloadHistory.values())
+      .filter(download => download.userId === userId)
+      .sort((a, b) => {
+        const dateA = a.downloadedAt ? new Date(a.downloadedAt).getTime() : 0;
+        const dateB = b.downloadedAt ? new Date(b.downloadedAt).getTime() : 0;
+        return dateB - dateA;
+      });
+  }
+
+  async createDownloadHistory(download: InsertDownloadHistory & { userId: string }): Promise<DownloadHistory> {
+    const id = randomUUID();
+    const newDownload: DownloadHistory = {
+      id,
+      userId: download.userId,
+      filename: download.filename,
+      fileType: download.fileType || 'excel',
+      invoicesCount: download.invoicesCount || '0',
+      fileSize: download.fileSize || null,
+      downloadedAt: new Date(),
+    };
+    
+    this.downloadHistory.set(id, newDownload);
+    return newDownload;
   }
 }
 

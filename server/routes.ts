@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertUserSchema, insertInvoiceSchema, insertUploadedFileSchema } from "@shared/schema";
+import { insertUserSchema, insertInvoiceSchema, insertUploadedFileSchema, insertDownloadHistorySchema } from "@shared/schema";
 import multer from "multer";
 import { z } from "zod";
 import { createProxyMiddleware } from "http-proxy-middleware";
@@ -125,22 +125,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Download Excel file endpoint
-  app.get('/api/download-excel', (req, res) => {
+  app.get('/api/download-excel', async (req, res) => {
     const excelPath = path.join(process.cwd(), 'python_backend/output/Consolidated_Invoices_Output.xlsx');
     
     // Check if file exists
     if (fs.existsSync(excelPath)) {
-      res.download(excelPath, 'GST_Invoices_Extract.xlsx', (err) => {
-        if (err) {
-          console.error('Download error:', err);
-          res.status(500).json({ error: 'Failed to download file' });
-        }
-      });
+      try {
+        // Get file stats for size
+        const stats = fs.statSync(excelPath);
+        
+        // Create download history entry (using demo user for now)
+        await storage.createDownloadHistory({
+          userId: 'user-1', // Demo user ID
+          filename: 'GST_Invoices_Extract.xlsx',
+          fileType: 'excel',
+          invoicesCount: '1', // This could be dynamic based on actual count
+          fileSize: stats.size.toString(),
+        });
+
+        res.download(excelPath, 'GST_Invoices_Extract.xlsx', (err) => {
+          if (err) {
+            console.error('Download error:', err);
+            res.status(500).json({ error: 'Failed to download file' });
+          }
+        });
+      } catch (error) {
+        console.error('Error creating download history:', error);
+        // Still allow download even if history creation fails
+        res.download(excelPath, 'GST_Invoices_Extract.xlsx');
+      }
     } else {
       console.error('Excel file not found at:', excelPath);
       res.status(404).json({ error: 'Excel file not found' });
     }
   });
+
+  // Download history routes
+  app.get("/api/download-history", async (req, res) => {
+    try {
+      // Using demo user for now - in real app, get from session
+      const downloads = await storage.getDownloadHistory('user-1');
+      res.json(downloads);
+    } catch (error) {
+      console.error('Error fetching download history:', error);
+      res.status(500).json({ error: 'Failed to fetch download history' });
+    }
+  });
+
   // Authentication routes
   app.post("/api/auth/login", async (req, res) => {
     try {

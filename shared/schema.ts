@@ -52,6 +52,16 @@ export const uploadedFiles = pgTable("uploaded_files", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const downloadHistory = pgTable("download_history", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id).notNull(),
+  filename: text("filename").notNull(),
+  fileType: text("file_type").notNull().default("excel"),
+  invoicesCount: text("invoices_count").default("0"),
+  downloadedAt: timestamp("downloaded_at").defaultNow(),
+  fileSize: text("file_size"),
+});
+
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).pick({
   email: true,
@@ -84,6 +94,13 @@ export const insertUploadedFileSchema = createInsertSchema(uploadedFiles).pick({
   extractedData: true,
 });
 
+export const insertDownloadHistorySchema = createInsertSchema(downloadHistory).pick({
+  filename: true,
+  fileType: true,
+  invoicesCount: true,
+  fileSize: true,
+});
+
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -96,3 +113,6 @@ export type InsertInvoice = z.infer<typeof insertInvoiceSchema>;
 
 export type UploadedFile = typeof uploadedFiles.$inferSelect;
 export type InsertUploadedFile = z.infer<typeof insertUploadedFileSchema>;
+
+export type DownloadHistory = typeof downloadHistory.$inferSelect;
+export type InsertDownloadHistory = z.infer<typeof insertDownloadHistorySchema>;

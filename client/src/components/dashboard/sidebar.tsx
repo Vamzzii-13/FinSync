@@ -14,6 +14,7 @@ import {
   User
 } from "lucide-react";
 import { useState } from "react";
+import DownloadHistoryComponent from "./download-history";
 
 const navigation = [
   { name: "Dashboard", icon: Gauge, active: true },
@@ -101,6 +102,14 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      {/* Download History Section */}
+      <motion.div
+        variants={itemVariants}
+        className="mt-8 mb-6"
+      >
+        <DownloadHistoryComponent />
+      </motion.div>
 
       <motion.div
         variants={itemVariants}
