@@ -5,6 +5,8 @@ import { insertUserSchema, insertInvoiceSchema, insertUploadedFileSchema } from 
 import multer from "multer";
 import { z } from "zod";
 import { createProxyMiddleware } from "http-proxy-middleware";
+import fs from "fs";
+import path from "path";
 
 // Configure multer for file uploads
 const upload = multer({
@@ -124,9 +126,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Download Excel file endpoint
   app.get('/api/download-excel', (req, res) => {
-    const fs = require('fs');
-    const path = require('path');
-    
     const excelPath = path.join(process.cwd(), 'python_backend/output/Consolidated_Invoices_Output.xlsx');
     
     // Check if file exists
