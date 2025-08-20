@@ -17,6 +17,11 @@ def process_invoice_files(file_paths):
         
         print(f"[STATUS] Processing {len(file_paths)} files...", flush=True)
         
+        # Generate Excel file path first
+        output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, "Consolidated_Invoices_Output.xlsx")
+        
         # Build the GST extraction graph
         graph = build_gst_graph()
         all_invoices = []
@@ -27,7 +32,7 @@ def process_invoice_files(file_paths):
             try:
                 result_state = graph.invoke({
                     "file_path": file_path,
-                    "output_path": "output/Consolidated_Invoices_Output.xlsx"
+                    "output_path": output_path
                 })
                 gst_data = result_state.get("gst_data", [])
                 if gst_data:
@@ -38,10 +43,6 @@ def process_invoice_files(file_paths):
             except Exception as e:
                 print(f"[ERROR] Failed to process {file_path}: {str(e)}", flush=True)
                 continue
-        
-        # Generate Excel file
-        output_path = "output/Consolidated_Invoices_Output.xlsx"
-        os.makedirs("output", exist_ok=True)
         
         if all_invoices:
             writer_agent(all_invoices, output_path)

@@ -124,13 +124,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Download Excel file endpoint
   app.get('/api/download-excel', (req, res) => {
-    const excelPath = 'python_backend/output/Consolidated_Invoices_Output.xlsx';
-    res.download(excelPath, 'GST_Invoices_Extract.xlsx', (err) => {
-      if (err) {
-        console.error('Download error:', err);
-        res.status(404).json({ error: 'Excel file not found' });
-      }
-    });
+    const fs = require('fs');
+    const path = require('path');
+    
+    const excelPath = path.join(process.cwd(), 'python_backend/output/Consolidated_Invoices_Output.xlsx');
+    
+    // Check if file exists
+    if (fs.existsSync(excelPath)) {
+      res.download(excelPath, 'GST_Invoices_Extract.xlsx', (err) => {
+        if (err) {
+          console.error('Download error:', err);
+          res.status(500).json({ error: 'Failed to download file' });
+        }
+      });
+    } else {
+      console.error('Excel file not found at:', excelPath);
+      res.status(404).json({ error: 'Excel file not found' });
+    }
   });
   // Authentication routes
   app.post("/api/auth/login", async (req, res) => {
