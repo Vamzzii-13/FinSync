@@ -1,6 +1,14 @@
 # Overview
 
-FinSync is a comprehensive GST (Goods and Services Tax) compliance and management platform designed to streamline tax filing processes for businesses. The application provides a complete solution for managing GST returns, processing invoices, tracking compliance metrics, and handling file uploads for tax documentation. Built as a full-stack web application, it combines modern frontend technologies with a robust backend to deliver an intuitive user experience for tax management workflows.
+FinSync is a comprehensive GST (Goods and Services Tax) compliance and management platform designed to streamline tax filing processes for businesses. The application provides a complete solution for managing GST returns, processing invoices, tracking compliance metrics, and handling file uploads for tax documentation. Built as a full-stack web application, it combines modern frontend technologies with AI-powered Python backend for intelligent invoice processing and Excel generation.
+
+## Recent Changes (August 2025)
+- ✅ Integrated Python FastAPI backend with AI-powered GST extraction agents
+- ✅ Connected LangGraph workflow for OCR → Parser → Validator → Writer pipeline
+- ✅ Implemented Google Gemini API integration for invoice text extraction
+- ✅ Added direct Python process execution from Node.js server
+- ✅ Enhanced file upload to support PDF, PNG, JPG formats with automatic Excel generation
+- ✅ Updated API key configuration to support GOOGLE_API_KEY environment variable
 
 # User Preferences
 
@@ -19,13 +27,18 @@ The frontend is built using React with TypeScript, leveraging Vite as the build 
 - **Charts**: Chart.js integration for data visualization and analytics dashboards
 
 ## Backend Architecture
-The backend follows a RESTful API design using Express.js with TypeScript:
+Hybrid architecture combining Node.js Express server with Python AI backend:
 
-- **Framework**: Express.js with TypeScript for type-safe server development
-- **Storage Layer**: Abstracted storage interface (IStorage) with in-memory implementation for development
-- **File Handling**: Multer middleware for secure file uploads with type validation and size limits
-- **Validation**: Zod schemas for runtime type checking and data validation
-- **Session Management**: Express sessions with PostgreSQL store integration
+- **Node.js Server**: Express.js with TypeScript for API routing and file handling
+- **Python Backend**: FastAPI with AI-powered GST extraction using Google Gemini API
+- **AI Workflow**: LangGraph implementation with specialized agents:
+  - OCR Agent: Text extraction from PDF/image files using Gemini
+  - Parser Agent: Structured GST data extraction with JSON formatting
+  - Validator Agent: Data validation and quality checks
+  - Writer Agent: Excel file generation with formatted output
+- **File Processing**: Direct Python process execution for invoice processing
+- **Storage Layer**: Abstracted storage interface with temp file handling for uploads
+- **Session Management**: Express sessions with secure cookie storage
 
 ## Data Storage Solutions
 The application uses a hybrid approach for data persistence:

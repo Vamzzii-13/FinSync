@@ -78,17 +78,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
         }
         
+        console.log('Python process output:', output);
+        console.log('Python process errors:', errorOutput);
+        
         if (code === 0) {
           try {
-            const result = JSON.parse(output);
-            res.json({
-              success: result.success,
-              message: result.message,
-              download_url: result.success ? '/api/download-excel' : null,
-              invoices_count: result.invoices_count
-            });
+            // Look for the JSON result in the output
+            const resultMatch = output.match(/\[RESULT\]\s*({.*})/);
+            if (resultMatch) {
+              const result = JSON.parse(resultMatch[1]);
+              res.json({
+                success: result.success,
+                message: result.message,
+                download_url: result.success ? '/api/download-excel' : null,
+                invoices_count: result.invoices_count
+              });
+            } else {
+              // Fallback: try to parse the entire output as JSON
+              const result = JSON.parse(output.trim());
+              res.json({
+                success: result.success,
+                message: result.message,
+                download_url: result.success ? '/api/download-excel' : null,
+                invoices_count: result.invoices_count
+              });
+            }
           } catch (e) {
-            res.status(500).json({ error: 'Failed to parse Python output' });
+            console.error('Failed to parse Python output:', e);
+            res.status(500).json({ 
+              error: 'Failed to parse Python output',
+              debug: { output, errorOutput }
+            });
           }
         } else {
           console.error('Python process error:', errorOutput);
