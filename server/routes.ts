@@ -1,0 +1,226 @@
+import type { Express } from "express";
+import { createServer, type Server } from "http";
+import { storage } from "./storage";
+import { insertUserSchema, insertInvoiceSchema, insertUploadedFileSchema } from "@shared/schema";
+import multer from "multer";
+import { z } from "zod";
+
+// Configure multer for file uploads
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 50 * 1024 * 1024, // 50MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      'application/pdf',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'text/csv'
+    ];
+    
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only PDF, Excel, and CSV files are allowed.'));
+    }
+  }
+});
+
+export async function registerRoutes(app: Express): Promise<Server> {
+  // Authentication routes
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      
+      const user = await storage.getUserByEmail(email);
+      if (!user || user.password !== password) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+
+      // Don't send password in response
+      const { password: _, ...userWithoutPassword } = user;
+      res.json({ user: userWithoutPassword });
+    } catch (error) {
+      res.status(500).json({ message: "Login failed" });
+    }
+  });
+
+  app.post("/api/auth/register", async (req, res) => {
+    try {
+      const userData = insertUserSchema.parse(req.body);
+      
+      // Check if user already exists
+      const existingUser = await storage.getUserByEmail(userData.email);
+      if (existingUser) {
+        return res.status(400).json({ message: "User already exists" });
+      }
+
+      const user = await storage.createUser(userData);
+      
+      // Don't send password in response
+      const { password: _, ...userWithoutPassword } = user;
+      res.status(201).json({ user: userWithoutPassword });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid input", errors: error.errors });
+      }
+      res.status(500).json({ message: "Registration failed" });
+    }
+  });
+
+  // Dashboard stats routes
+  app.get("/api/dashboard/stats/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      
+      const gstReturns = await storage.getGstReturns(userId);
+      const invoices = await storage.getInvoices(userId);
+      const uploadedFiles = await storage.getUploadedFiles(userId);
+      
+      const stats = {
+        totalGstCollection: invoices.reduce((sum, inv) => sum + parseFloat(inv.taxAmount || "0"), 0),
+        processedReturns: gstReturns.filter(ret => ret.status === "Filed").length,
+        pendingActions: gstReturns.filter(ret => ret.status === "Pending").length,
+        complianceScore: Math.round((gstReturns.filter(ret => ret.status === "Filed").length / Math.max(gstReturns.length, 1)) * 100),
+        recentInvoices: invoices.slice(0, 5),
+        uploadedFilesCount: uploadedFiles.length
+      };
+      
+      res.json(stats);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch dashboard stats" });
+    }
+  });
+
+  // GST Returns routes
+  app.get("/api/gst-returns/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const gstReturns = await storage.getGstReturns(userId);
+      res.json(gstReturns);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch GST returns" });
+    }
+  });
+
+  // Invoice routes
+  app.get("/api/invoices/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const invoices = await storage.getInvoices(userId);
+      res.json(invoices);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch invoices" });
+    }
+  });
+
+  app.post("/api/invoices", async (req, res) => {
+    try {
+      const invoiceData = insertInvoiceSchema.extend({
+        userId: z.string()
+      }).parse(req.body);
+      
+      const invoice = await storage.createInvoice(invoiceData);
+      res.status(201).json(invoice);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid input", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create invoice" });
+    }
+  });
+
+  // File upload routes
+  app.post("/api/files/upload", upload.array('files'), async (req, res) => {
+    try {
+      const { userId } = req.body;
+      if (!userId) {
+        return res.status(400).json({ message: "User ID is required" });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      if (!files || files.length === 0) {
+        return res.status(400).json({ message: "No files uploaded" });
+      }
+
+      const uploadedFiles = [];
+      
+      for (const file of files) {
+        const fileData = {
+          userId,
+          fileName: file.originalname,
+          fileSize: file.size.toString(),
+          fileType: file.mimetype,
+          extractedData: JSON.stringify({
+            // Mock extracted data - in real implementation, this would use OCR/AI
+            invoiceNumber: `INV-${Date.now()}`,
+            amount: "50000",
+            taxAmount: "9000",
+            gstin: "29AABCT1332L000",
+            hsnCode: "8517"
+          })
+        };
+        
+        const uploadedFile = await storage.createUploadedFile(fileData);
+        
+        // Simulate processing time
+        setTimeout(async () => {
+          await storage.updateUploadedFile(uploadedFile.id, { status: "completed" });
+        }, 2000);
+        
+        uploadedFiles.push(uploadedFile);
+      }
+
+      res.status(201).json({ files: uploadedFiles });
+    } catch (error) {
+      res.status(500).json({ message: "File upload failed" });
+    }
+  });
+
+  app.get("/api/files/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const files = await storage.getUploadedFiles(userId);
+      res.json(files);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch uploaded files" });
+    }
+  });
+
+  // Chart data routes
+  app.get("/api/charts/gst-trends/:userId", async (req, res) => {
+    try {
+      // Mock GST trend data - in real implementation, this would aggregate from database
+      const trendData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        data: [180000, 210000, 245000, 220000, 270000, 295000]
+      };
+      res.json(trendData);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch GST trend data" });
+    }
+  });
+
+  app.get("/api/charts/compliance/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const gstReturns = await storage.getGstReturns(userId);
+      
+      const completed = gstReturns.filter(ret => ret.status === "Filed").length;
+      const pending = gstReturns.filter(ret => ret.status === "Pending").length;
+      const overdue = gstReturns.filter(ret => ret.status === "Overdue").length;
+      
+      const complianceData = {
+        labels: ['Completed', 'Pending', 'Overdue'],
+        data: [completed, pending, overdue]
+      };
+      
+      res.json(complianceData);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch compliance data" });
+    }
+  });
+
+  const httpServer = createServer(app);
+  return httpServer;
+}
