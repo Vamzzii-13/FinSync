@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { useNotification } from "@/hooks/use-notification";
+import { useToast } from "@/hooks/use-toast";
 import { CloudUpload, FileText, X } from "lucide-react";
 
 export default function FileUpload() {
@@ -11,7 +11,15 @@ export default function FileUpload() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const { showNotification } = useNotification();
+  const { toast } = useToast();
+
+  const showNotification = (message: string, type: "success" | "error") => {
+    toast({
+      title: type === "success" ? "Success" : "Error",
+      description: message,
+      variant: type === "error" ? "destructive" : "default",
+    });
+  };
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -38,7 +46,7 @@ export default function FileUpload() {
 
   const handleFiles = useCallback((files: File[]) => {
     const validFiles = files.filter(file => {
-      const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'text/csv'];
+      const validTypes = ['application/pdf', 'image/png', 'image/jpeg'];
       const maxSize = 50 * 1024 * 1024; // 50MB
       
       if (!validTypes.includes(file.type)) {
@@ -56,25 +64,59 @@ export default function FileUpload() {
 
     if (validFiles.length > 0) {
       setUploadedFiles(prev => [...prev, ...validFiles]);
-      simulateUpload(validFiles);
+      processFiles(validFiles);
     }
   }, [showNotification]);
 
-  const simulateUpload = useCallback((files: File[]) => {
+  const processFiles = useCallback(async (files: File[]) => {
     setIsUploading(true);
     setUploadProgress(0);
     
-    const interval = setInterval(() => {
-      setUploadProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsUploading(false);
-          showNotification(`Successfully uploaded ${files.length} file(s)!`, "success");
-          return 100;
-        }
-        return prev + 10;
+    try {
+      const formData = new FormData();
+      files.forEach(file => {
+        formData.append('files', file);
       });
-    }, 200);
+      
+      // Simulate progress
+      const progressInterval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval);
+            return 90;
+          }
+          return prev + 10;
+        });
+      }, 200);
+      
+      const response = await fetch('/api/extract-gst', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      clearInterval(progressInterval);
+      setUploadProgress(100);
+      
+      if (response.ok) {
+        const result = await response.json();
+        setIsUploading(false);
+        showNotification(`Successfully processed ${files.length} invoice(s)! Excel file generated.`, "success");
+        
+        // Download the Excel file
+        if (result.download_url) {
+          const link = document.createElement('a');
+          link.href = result.download_url;
+          link.download = 'GST_Invoices_Extract.xlsx';
+          link.click();
+        }
+      } else {
+        throw new Error('Processing failed');
+      }
+    } catch (error) {
+      setIsUploading(false);
+      setUploadProgress(0);
+      showNotification('Failed to process files. Please try again.', 'error');
+    }
   }, [showNotification]);
 
   const removeFile = useCallback((index: number) => {
@@ -139,7 +181,7 @@ export default function FileUpload() {
             <input
               type="file"
               multiple
-              accept=".pdf,.xlsx,.csv"
+              accept=".pdf,.png,.jpg,.jpeg"
               onChange={handleFileSelect}
               className="hidden"
               id="file-input"
@@ -155,7 +197,7 @@ export default function FileUpload() {
             </Button>
             
             <p className="text-sm text-gray-400 mt-4" data-testid="upload-formats">
-              Supports: PDF, Excel, CSV (Max 50MB)
+              Supports: PDF, PNG, JPG (Max 50MB per file)
             </p>
           </motion.div>
 

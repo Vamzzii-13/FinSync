@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertUserSchema, insertInvoiceSchema, insertUploadedFileSchema } from "@shared/schema";
 import multer from "multer";
 import { z } from "zod";
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 // Configure multer for file uploads
 const upload = multer({
@@ -27,6 +28,90 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // GST extraction endpoint - direct Python integration
+  app.post('/api/extract-gst', upload.array('files'), async (req, res) => {
+    try {
+      const files = req.files as Express.Multer.File[];
+      
+      if (!files || files.length === 0) {
+        return res.status(400).json({ error: 'No files uploaded' });
+      }
+      
+      // Save uploaded files temporarily
+      const tempFiles: string[] = [];
+      for (const file of files) {
+        const tempPath = `temp_uploads/${Date.now()}_${file.originalname}`;
+        await import('fs').then(fs => 
+          fs.promises.writeFile(tempPath, file.buffer)
+        );
+        tempFiles.push(tempPath);
+      }
+      
+      // Process files with Python backend
+      const { spawn } = await import('child_process');
+      const pythonProcess = spawn('python', [
+        'python_backend/simple_server.py',
+        ...tempFiles
+      ], {
+        cwd: process.cwd(),
+        env: { ...process.env, PYTHONPATH: 'python_backend' }
+      });
+      
+      let output = '';
+      let errorOutput = '';
+      
+      pythonProcess.stdout.on('data', (data) => {
+        output += data.toString();
+      });
+      
+      pythonProcess.stderr.on('data', (data) => {
+        errorOutput += data.toString();
+      });
+      
+      pythonProcess.on('close', async (code) => {
+        // Cleanup temp files
+        for (const tempFile of tempFiles) {
+          try {
+            await import('fs').then(fs => fs.promises.unlink(tempFile));
+          } catch (e) {
+            console.log('Failed to cleanup temp file:', tempFile);
+          }
+        }
+        
+        if (code === 0) {
+          try {
+            const result = JSON.parse(output);
+            res.json({
+              success: result.success,
+              message: result.message,
+              download_url: result.success ? '/api/download-excel' : null,
+              invoices_count: result.invoices_count
+            });
+          } catch (e) {
+            res.status(500).json({ error: 'Failed to parse Python output' });
+          }
+        } else {
+          console.error('Python process error:', errorOutput);
+          res.status(500).json({ error: 'Failed to process files' });
+        }
+      });
+      
+    } catch (error) {
+      console.error('GST extraction error:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  // Download Excel file endpoint
+  app.get('/api/download-excel', (req, res) => {
+    const excelPath = 'python_backend/output/Consolidated_Invoices_Output.xlsx';
+    res.download(excelPath, 'GST_Invoices_Extract.xlsx', (err) => {
+      if (err) {
+        console.error('Download error:', err);
+        res.status(404).json({ error: 'Excel file not found' });
+      }
+    });
+  });
   // Authentication routes
   app.post("/api/auth/login", async (req, res) => {
     try {
