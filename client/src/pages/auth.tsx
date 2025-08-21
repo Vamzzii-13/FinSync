@@ -64,88 +64,126 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
-      {/* Dynamic Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-600 to-purple-700">
-        <div className="absolute inset-0 bg-gradient-to-tl from-purple-600/30 via-blue-500/20 to-cyan-400/30 animate-gradient-slow"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-800/40 via-transparent to-purple-600/40 animate-gradient-reverse"></div>
-      </div>
-      
-      {/* Animated Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-float-slow"></div>
-        <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-blue-300/10 rounded-full blur-3xl animate-float-reverse"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-purple-300/10 rounded-full blur-3xl animate-float-slow"></div>
-      </div>
+    <div className="min-h-screen flex overflow-hidden">
+      {/* Left Side - FinSync Branding */}
+      <div className="flex-1 relative overflow-hidden">
+        {/* Enhanced Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700">
+          <div className="absolute inset-0 bg-gradient-to-tl from-cyan-600/40 via-blue-500/30 to-emerald-400/20 animate-gradient-slow"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-violet-800/50 via-transparent to-rose-600/30 animate-gradient-reverse"></div>
+        </div>
+        
+        {/* Animated Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/8 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-cyan-300/15 rounded-full blur-3xl animate-float-reverse"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-purple-300/12 rounded-full blur-3xl animate-float-slow"></div>
+        </div>
 
-      {/* Glass Morphism Container */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 w-full max-w-md"
-        data-testid="auth-page"
-      >
-        {/* Header with Logo */}
-        <div className="text-center mb-8">
+        {/* Branding Content */}
+        <div className="relative z-10 flex flex-col justify-center items-center h-full p-12 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8"
           >
-            <LogoText className="justify-center mb-4" />
+            <LogoText className="justify-center mb-6 scale-150" />
           </motion.div>
+          
+          <motion.h1 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-5xl font-bold text-white mb-6 leading-tight"
+          >
+            Professional GST
+            <br />
+            <span className="text-cyan-300">Management Platform</span>
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-xl text-blue-100 mb-8 max-w-md leading-relaxed"
+          >
+            Streamline your tax compliance with AI-powered invoice processing and real-time analytics
+          </motion.p>
+
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-col space-y-4 text-sm text-cyan-200"
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+              <span>AI-Powered Invoice Extraction</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+              <span>Real-time Compliance Analytics</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+              <span>Secure Enterprise Platform</span>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Right Side - Login Panel */}
+      <div className="w-96 bg-white relative overflow-hidden shadow-2xl">
+        {/* Subtle Right Panel Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-blue-50/50"></div>
+        
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="relative z-10 flex flex-col justify-center h-full p-8"
+          data-testid="auth-page"
+        >
+        {/* Header */}
+        <div className="text-center mb-8">
           <motion.h1 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-3xl font-bold text-white drop-shadow-lg"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-3xl font-bold text-gray-800 mb-2"
           >
-            Professional GST Management
+            {isLogin ? "Welcome Back" : "Get Started"}
           </motion.h1>
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-blue-100 mt-2 text-lg"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-gray-600"
           >
-            Secure enterprise platform for tax compliance
+            {isLogin 
+              ? "Sign in to access your dashboard" 
+              : "Create your FinSync account"
+            }
           </motion.p>
         </div>
 
-        {/* Glass Morphism Authentication Card */}
+        {/* Authentication Form */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <Card className="glass-card backdrop-blur-xl bg-white/10 border-white/20 shadow-2xl">
-            <CardHeader className="text-center pb-4">
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <CardTitle className="text-2xl text-white font-semibold">
-                  {isLogin ? "Welcome Back" : "Join FinSync"}
-                </CardTitle>
-                <CardDescription className="text-blue-100 mt-2">
-                  {isLogin 
-                    ? "Access your professional dashboard" 
-                    : "Create your enterprise account"
-                  }
-                </CardDescription>
-              </motion.div>
-            </CardHeader>
+          <Card className="border-0 shadow-none bg-transparent">
+            <CardContent className="p-0">
 
-          <CardContent>
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6 bg-white/10 backdrop-blur-sm border-white/20">
+              <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-100">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
                   data-testid="login-tab"
-                  className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900"
                 >
                   Sign In
                 </TabsTrigger>
@@ -153,7 +191,7 @@ export default function AuthPage() {
                   value="register" 
                   onClick={() => setIsLogin(false)}
                   data-testid="register-tab"
-                  className="text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900"
                 >
                   Sign Up
                 </TabsTrigger>
@@ -169,18 +207,18 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.7 }}
                     >
-                      <Label htmlFor="name" className="text-sm font-medium text-white">
+                      <Label htmlFor="name" className="text-sm font-medium text-gray-700">
                         Full Name
                       </Label>
                       <div className="relative">
-                        <User className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+                        <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                         <Input
                           id="name"
                           type="text"
                           placeholder="Enter your full name"
                           value={formData.name}
                           onChange={(e) => handleInputChange("name", e.target.value)}
-                          className="pl-10 glass-input bg-white/10 border-white/20 text-white placeholder-blue-200"
+                          className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                           required={!isLogin}
                           data-testid="name-input"
                         />
@@ -193,18 +231,18 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.8 }}
                     >
-                      <Label htmlFor="company" className="text-sm font-medium text-white">
+                      <Label htmlFor="company" className="text-sm font-medium text-gray-700">
                         Company Name
                       </Label>
                       <div className="relative">
-                        <Building className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+                        <Building className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                         <Input
                           id="company"
                           type="text"
                           placeholder="Enter your company name"
                           value={formData.company}
                           onChange={(e) => handleInputChange("company", e.target.value)}
-                          className="pl-10 glass-input bg-white/10 border-white/20 text-white placeholder-blue-200"
+                          className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                           required={!isLogin}
                           data-testid="company-input"
                         />
@@ -220,18 +258,18 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.7 : 0.9 }}
                 >
-                  <Label htmlFor="email" className="text-sm font-medium text-white">
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
                     Email Address
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
                       id="email"
                       type="email"
                       placeholder="Enter your email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="pl-10 glass-input bg-white/10 border-white/20 text-white placeholder-blue-200"
+                      className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required
                       data-testid="email-input"
                     />
@@ -245,25 +283,25 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.8 : 1.0 }}
                 >
-                  <Label htmlFor="password" className="text-sm font-medium text-white">
+                  <Label htmlFor="password" className="text-sm font-medium text-gray-700">
                     Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-blue-200" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
-                      className="pl-10 pr-10 glass-input bg-white/10 border-white/20 text-white placeholder-blue-200"
+                      className="pl-10 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                       required
                       data-testid="password-input"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3 text-blue-200 hover:text-white transition-colors"
+                      className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition-colors"
                       data-testid="toggle-password"
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -279,7 +317,7 @@ export default function AuthPage() {
                 >
                   <Button
                     type="submit"
-                    className="w-full mt-6 bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                    className="w-full mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                     data-testid="submit-button"
                   >
                     {isLogin ? "Sign In" : "Create Account"}
@@ -289,7 +327,7 @@ export default function AuthPage() {
 
               {/* Footer */}
               <motion.div 
-                className="mt-6 text-center text-sm text-blue-100"
+                className="mt-6 text-center text-sm text-gray-600"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
@@ -299,7 +337,7 @@ export default function AuthPage() {
                     Don't have an account?{" "}
                     <button
                       onClick={() => setIsLogin(false)}
-                      className="text-white hover:text-blue-200 font-medium underline underline-offset-2 transition-colors"
+                      className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
                       data-testid="switch-to-register"
                     >
                       Sign up
@@ -310,7 +348,7 @@ export default function AuthPage() {
                     Already have an account?{" "}
                     <button
                       onClick={() => setIsLogin(true)}
-                      className="text-white hover:text-blue-200 font-medium underline underline-offset-2 transition-colors"
+                      className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
                       data-testid="switch-to-login"
                     >
                       Sign in
@@ -325,7 +363,7 @@ export default function AuthPage() {
 
         {/* Security notice */}
         <motion.div 
-          className="mt-6 text-center text-xs text-blue-200"
+          className="mt-8 text-center text-xs text-gray-500"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.3 }}
@@ -333,6 +371,7 @@ export default function AuthPage() {
           <p>🔒 Secure enterprise platform • 256-bit encryption • GDPR compliant</p>
         </motion.div>
       </motion.div>
+      </div>
     </div>
   );
 }
