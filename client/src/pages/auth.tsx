@@ -95,18 +95,18 @@ export default function AuthPage() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl font-bold text-white mb-6 leading-tight"
+            className="text-5xl font-bold text-white mb-6 leading-tight aesthetic-heading"
           >
             Professional GST
             <br />
-            <span className="text-cyan-300">Management Platform</span>
+            <span className="text-cyan-300 aesthetic-subheading">Management Platform</span>
           </motion.h1>
           
           <motion.p 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl text-blue-100 mb-8 max-w-md leading-relaxed"
+            className="text-xl text-blue-100 mb-8 max-w-md aesthetic-light"
           >
             Streamline your tax compliance with AI-powered invoice processing and real-time analytics
           </motion.p>
@@ -115,19 +115,19 @@ export default function AuthPage() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col space-y-4 text-sm text-cyan-200"
+            className="flex flex-col space-y-4 text-sm text-cyan-200 aesthetic-body"
           >
             <div className="flex items-center space-x-3">
               <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-              <span>AI-Powered Invoice Extraction</span>
+              <span className="font-medium">AI-Powered Invoice Extraction</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-              <span>Real-time Compliance Analytics</span>
+              <span className="font-medium">Real-time Compliance Analytics</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-              <span>Secure Enterprise Platform</span>
+              <span className="font-medium">Secure Enterprise Platform</span>
             </div>
           </motion.div>
         </div>
@@ -151,7 +151,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl font-bold text-gray-800 mb-2"
+            className="text-3xl font-bold text-gray-800 mb-2 aesthetic-heading"
           >
             {isLogin ? "Welcome Back" : "Get Started"}
           </motion.h1>
@@ -159,7 +159,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-gray-600"
+            className="text-gray-600 aesthetic-light"
           >
             {isLogin 
               ? "Sign in to access your dashboard" 
@@ -183,7 +183,7 @@ export default function AuthPage() {
                   value="login" 
                   onClick={() => setIsLogin(true)}
                   data-testid="login-tab"
-                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900"
+                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body"
                 >
                   Sign In
                 </TabsTrigger>
@@ -191,7 +191,7 @@ export default function AuthPage() {
                   value="register" 
                   onClick={() => setIsLogin(false)}
                   data-testid="register-tab"
-                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900"
+                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body"
                 >
                   Sign Up
                 </TabsTrigger>
@@ -207,7 +207,7 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.7 }}
                     >
-                      <Label htmlFor="name" className="text-sm font-medium text-gray-700">
+                      <Label htmlFor="name" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
                         Full Name
                       </Label>
                       <div className="relative">
@@ -219,6 +219,7 @@ export default function AuthPage() {
                           value={formData.name}
                           onChange={(e) => handleInputChange("name", e.target.value)}
                           className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                          style={{ fontFamily: 'Poppins, sans-serif' }}
                           required={!isLogin}
                           data-testid="name-input"
                         />
@@ -231,7 +232,7 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.8 }}
                     >
-                      <Label htmlFor="company" className="text-sm font-medium text-gray-700">
+                      <Label htmlFor="company" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
                         Company Name
                       </Label>
                       <div className="relative">
@@ -243,6 +244,7 @@ export default function AuthPage() {
                           value={formData.company}
                           onChange={(e) => handleInputChange("company", e.target.value)}
                           className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                          style={{ fontFamily: 'Poppins, sans-serif' }}
                           required={!isLogin}
                           data-testid="company-input"
                         />
@@ -258,7 +260,7 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.7 : 0.9 }}
                 >
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
                     Email Address
                   </Label>
                   <div className="relative">
@@ -270,6 +272,7 @@ export default function AuthPage() {
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
                       className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      style={{ fontFamily: 'Poppins, sans-serif' }}
                       required
                       data-testid="email-input"
                     />
@@ -283,7 +286,7 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.8 : 1.0 }}
                 >
-                  <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="password" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
                     Password
                   </Label>
                   <div className="relative">
@@ -295,6 +298,7 @@ export default function AuthPage() {
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
                       className="pl-10 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      style={{ fontFamily: 'Poppins, sans-serif' }}
                       required
                       data-testid="password-input"
                     />
@@ -317,7 +321,7 @@ export default function AuthPage() {
                 >
                   <Button
                     type="submit"
-                    className="w-full mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                    className="w-full mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg aesthetic-button"
                     data-testid="submit-button"
                   >
                     {isLogin ? "Sign In" : "Create Account"}
@@ -327,7 +331,7 @@ export default function AuthPage() {
 
               {/* Footer */}
               <motion.div 
-                className="mt-6 text-center text-sm text-gray-600"
+                className="mt-6 text-center text-sm text-gray-600 aesthetic-body"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
@@ -363,7 +367,7 @@ export default function AuthPage() {
 
         {/* Security notice */}
         <motion.div 
-          className="mt-8 text-center text-xs text-gray-500"
+          className="mt-8 text-center text-xs text-gray-500 aesthetic-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.3 }}
