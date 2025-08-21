@@ -110,32 +110,35 @@ export default function AuthPage() {
         </div>
 
         {/* Branding Content */}
-        <div className="relative z-10 flex flex-col justify-center items-center h-full p-12 text-center">
+        <div className="relative z-10 flex flex-col justify-center items-center h-full px-16 py-12 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
+            className="mb-12"
           >
-            <LogoText className="justify-center mb-6 scale-150" />
+            <LogoText className="justify-center mb-8 scale-150" />
           </motion.div>
           
-          <motion.h1 
-            initial={{ y: 30, opacity: 0 }}
+          <motion.div
+            initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl font-bold text-white mb-6 leading-tight aesthetic-heading"
+            className="mb-10"
           >
-            Professional GST
-            <br />
-            <span className="text-cyan-300 aesthetic-subheading">Management Platform</span>
-          </motion.h1>
+            <h1 className="text-5xl text-white mb-4 aesthetic-display tracking-tight">
+              Professional GST
+            </h1>
+            <h2 className="text-4xl text-cyan-300 aesthetic-heading tracking-tight">
+              Management Platform
+            </h2>
+          </motion.div>
           
           <motion.p 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl text-slate-200 mb-8 max-w-md aesthetic-light"
+            className="text-lg text-slate-200 mb-12 max-w-lg text-center aesthetic-light leading-relaxed"
           >
             Streamline your tax compliance with AI-powered invoice processing and real-time analytics
           </motion.p>
@@ -144,19 +147,19 @@ export default function AuthPage() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col space-y-4 text-sm text-slate-300 aesthetic-body"
+            className="flex flex-col space-y-5 text-base text-slate-300 aesthetic-body max-w-sm"
           >
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-              <span className="font-medium">AI-Powered Invoice Extraction</span>
+            <div className="flex items-center justify-start space-x-4">
+              <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse flex-shrink-0"></div>
+              <span className="text-left">AI-Powered Invoice Extraction</span>
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-              <span className="font-medium">Real-time Compliance Analytics</span>
+            <div className="flex items-center justify-start space-x-4">
+              <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-pulse flex-shrink-0"></div>
+              <span className="text-left">Real-time Compliance Analytics</span>
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-              <span className="font-medium">Secure Enterprise Platform</span>
+            <div className="flex items-center justify-start space-x-4">
+              <div className="w-2.5 h-2.5 bg-purple-400 rounded-full animate-pulse flex-shrink-0"></div>
+              <span className="text-left">Secure Enterprise Platform</span>
             </div>
           </motion.div>
         </div>
@@ -175,12 +178,12 @@ export default function AuthPage() {
           data-testid="auth-page"
         >
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-10">
           <motion.h1 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl font-bold text-gray-800 mb-2 aesthetic-heading"
+            className="text-3xl text-gray-900 mb-3 aesthetic-heading tracking-tight"
           >
             {isLogin ? "Welcome Back" : "Get Started"}
           </motion.h1>
@@ -188,7 +191,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-gray-600 aesthetic-light"
+            className="text-gray-600 aesthetic-light text-base"
           >
             {isLogin 
               ? "Sign in to access your dashboard" 
@@ -207,12 +210,12 @@ export default function AuthPage() {
             <CardContent className="p-0">
 
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-100">
+              <TabsList className="grid w-full grid-cols-2 mb-8 bg-gray-100 p-1">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
                   data-testid="login-tab"
-                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body"
+                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body py-3"
                 >
                   Sign In
                 </TabsTrigger>
@@ -220,7 +223,7 @@ export default function AuthPage() {
                   value="register" 
                   onClick={() => setIsLogin(false)}
                   data-testid="register-tab"
-                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body"
+                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body py-3"
                 >
                   Sign Up
                 </TabsTrigger>
@@ -236,19 +239,18 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.7 }}
                     >
-                      <Label htmlFor="name" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                      <Label htmlFor="name" className="text-sm text-gray-700 aesthetic-body mb-2 block">
                         Full Name
                       </Label>
                       <div className="relative">
-                        <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                         <Input
                           id="name"
                           type="text"
                           placeholder="Enter your full name"
                           value={formData.name}
                           onChange={(e) => handleInputChange("name", e.target.value)}
-                          className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                          style={{ fontFamily: 'Poppins, sans-serif' }}
+                          className="pl-11 py-3 border-gray-300 focus:border-blue-500 focus:ring-blue-500 aesthetic-light"
                           required={!isLogin}
                           data-testid="name-input"
                         />
@@ -261,19 +263,18 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.8 }}
                     >
-                      <Label htmlFor="company" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                      <Label htmlFor="company" className="text-sm text-gray-700 aesthetic-body mb-2 block">
                         Company Name
                       </Label>
                       <div className="relative">
-                        <Building className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                        <Building className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                         <Input
                           id="company"
                           type="text"
                           placeholder="Enter your company name"
                           value={formData.company}
                           onChange={(e) => handleInputChange("company", e.target.value)}
-                          className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                          style={{ fontFamily: 'Poppins, sans-serif' }}
+                          className="pl-11 py-3 border-gray-300 focus:border-blue-500 focus:ring-blue-500 aesthetic-light"
                           required={!isLogin}
                           data-testid="company-input"
                         />
@@ -289,19 +290,18 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.7 : 0.9 }}
                 >
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  <Label htmlFor="email" className="text-sm text-gray-700 aesthetic-body mb-2 block">
                     Email Address
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <Input
                       id="email"
                       type="email"
                       placeholder="Enter your email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="pl-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                      style={{ fontFamily: 'Poppins, sans-serif' }}
+                      className="pl-11 py-3 border-gray-300 focus:border-blue-500 focus:ring-blue-500 aesthetic-light"
                       required
                       data-testid="email-input"
                     />
@@ -315,26 +315,25 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.8 : 1.0 }}
                 >
-                  <Label htmlFor="password" className="text-sm font-medium text-gray-700" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  <Label htmlFor="password" className="text-sm text-gray-700 aesthetic-body mb-2 block">
                     Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
-                      className="pl-10 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                      style={{ fontFamily: 'Poppins, sans-serif' }}
+                      className="pl-11 pr-11 py-3 border-gray-300 focus:border-blue-500 focus:ring-blue-500 aesthetic-light"
                       required
                       data-testid="password-input"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                       data-testid="toggle-password"
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -350,7 +349,7 @@ export default function AuthPage() {
                 >
                   <Button
                     type="submit"
-                    className="w-full mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg aesthetic-button"
+                    className="w-full mt-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg aesthetic-button"
                     data-testid="submit-button"
                   >
                     {isLogin ? "Sign In" : "Create Account"}
@@ -360,7 +359,7 @@ export default function AuthPage() {
 
               {/* Footer */}
               <motion.div 
-                className="mt-6 text-center text-sm text-gray-600 aesthetic-body"
+                className="mt-8 text-center text-sm text-gray-600 aesthetic-light"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
@@ -396,12 +395,12 @@ export default function AuthPage() {
 
         {/* Security notice */}
         <motion.div 
-          className="mt-8 text-center text-xs text-gray-500 aesthetic-light"
+          className="mt-10 text-center text-xs text-gray-500 aesthetic-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.3 }}
         >
-          <p>🔒 Secure enterprise platform • 256-bit encryption • GDPR compliant</p>
+          <p className="tracking-wide">🔒 Secure enterprise platform • 256-bit encryption • GDPR compliant</p>
         </motion.div>
       </motion.div>
       </div>
