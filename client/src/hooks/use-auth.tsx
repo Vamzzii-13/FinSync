@@ -25,10 +25,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Check for existing session
+    // Check for existing session on app start
     const savedUser = localStorage.getItem("finsync_user");
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        // Clear invalid data if JSON parsing fails
+        localStorage.removeItem("finsync_user");
+      }
     }
     setIsLoading(false);
   }, []);
@@ -84,7 +89,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("finsync_user");
-    setLocation("/auth");
+    localStorage.clear(); // Clear all localStorage data
+    setLocation("/");
   };
 
   return (

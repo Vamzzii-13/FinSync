@@ -2,11 +2,12 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/use-auth";
-import { Bell, Search, User } from "lucide-react";
+import { Bell, Search, User, LogOut, Settings, UserCircle } from "lucide-react";
 
 export default function Header() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const headerVariants = {
     hidden: { y: -50, opacity: 0 },
@@ -76,21 +77,58 @@ export default function Header() {
             whileTap={{ scale: 0.95 }}
             className="relative"
           >
-            <Button
-              variant="outline"
-              className="flex items-center space-x-3 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-lift"
-              data-testid="user-button"
-            >
-              <Avatar className="w-10 h-10">
-                <AvatarImage src={user?.avatar} />
-                <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600">
-                  <User className="w-4 h-4 text-white" />
-                </AvatarFallback>
-              </Avatar>
-              <span className="font-medium text-gray-700 pr-2" data-testid="user-name-header">
-                {user?.name || "John Doe"}
-              </span>
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="flex items-center space-x-3 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover-lift"
+                  data-testid="user-menu-button"
+                >
+                  <Avatar className="w-10 h-10">
+                    <AvatarImage src={user?.avatar} />
+                    <AvatarFallback className="bg-blue-600">
+                      <User className="w-4 h-4 text-white" />
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="font-medium text-gray-700 pr-2" data-testid="user-name-header">
+                    {user?.name || "John Doe"}
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 mt-2">
+                <div className="px-2 py-1.5">
+                  <p className="text-sm font-medium text-gray-900" data-testid="dropdown-user-name">
+                    {user?.name}
+                  </p>
+                  <p className="text-xs text-gray-500" data-testid="dropdown-user-email">
+                    {user?.email}
+                  </p>
+                  {user?.company && (
+                    <p className="text-xs text-gray-500" data-testid="dropdown-user-company">
+                      {user.company}
+                    </p>
+                  )}
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer" data-testid="profile-menu-item">
+                  <UserCircle className="mr-2 h-4 w-4" />
+                  <span>Profile</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer" data-testid="settings-menu-item">
+                  <Settings className="mr-2 h-4 w-4" />
+                  <span>Settings</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem 
+                  className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50" 
+                  onClick={logout}
+                  data-testid="logout-menu-item"
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Sign Out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </motion.div>
         </div>
       </div>

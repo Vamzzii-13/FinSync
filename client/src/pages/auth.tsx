@@ -46,7 +46,7 @@ export default function AuthPage() {
       } else {
         await register(formData);
         toast({
-          title: "Registration Successful",
+          title: "Registration Successful", 
           description: "Your account has been created successfully",
         });
       }
