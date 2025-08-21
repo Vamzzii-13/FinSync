@@ -239,6 +239,10 @@ export class MemStorage implements IStorage {
       });
   }
 
+  async deleteDownloadHistory(id: string): Promise<boolean> {
+    return this.downloadHistory.delete(id);
+  }
+
   async createDownloadHistory(download: InsertDownloadHistory & { userId: string }): Promise<DownloadHistory> {
     const id = randomUUID();
     const newDownload: DownloadHistory = {

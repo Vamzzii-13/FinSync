@@ -172,6 +172,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.delete("/api/download-history/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const deleted = await storage.deleteDownloadHistory(id);
+      
+      if (deleted) {
+        res.json({ success: true, message: "Report deleted successfully" });
+      } else {
+        res.status(404).json({ error: "Report not found" });
+      }
+    } catch (error) {
+      console.error('Error deleting download history:', error);
+      res.status(500).json({ error: 'Failed to delete report' });
+    }
+  });
+
   // Authentication routes
   app.post("/api/auth/login", async (req, res) => {
     try {

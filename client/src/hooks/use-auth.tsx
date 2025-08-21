@@ -13,7 +13,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, name: string, company?: string) => Promise<void>;
+  register: (userData: any) => Promise<void>;
   logout: () => void;
 }
 
@@ -57,22 +57,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const register = async (email: string, password: string, name: string, company?: string) => {
+  const register = async (userData: any) => {
     setIsLoading(true);
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const userData: User = {
-        id: "1",
-        email,
-        name,
-        company,
+      const newUser: User = {
+        id: Date.now().toString(),
+        email: userData.email,
+        name: userData.name,
+        company: userData.company,
         avatar: "/api/placeholder/40/40"
       };
       
-      setUser(userData);
-      localStorage.setItem("finsync_user", JSON.stringify(userData));
+      setUser(newUser);
+      localStorage.setItem("finsync_user", JSON.stringify(newUser));
       setLocation("/dashboard");
     } catch (error) {
       throw new Error("Registration failed");

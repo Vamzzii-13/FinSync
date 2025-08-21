@@ -45,9 +45,26 @@ export default function ReportsPage() {
         a.click();
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
+        
+        // Refresh the reports list after download
+        window.location.reload();
       }
     } catch (error) {
       console.error('Download failed:', error);
+    }
+  };
+
+  const handleDeleteReport = async (reportId: string) => {
+    try {
+      const response = await fetch(`/api/download-history/${reportId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        // Refresh the reports list
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Delete failed:', error);
     }
   };
 
@@ -228,7 +245,12 @@ export default function ReportsPage() {
                       <Download className="w-4 h-4 mr-1" />
                       Download
                     </Button>
-                    <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-red-600 hover:text-red-700"
+                      onClick={() => handleDeleteReport(report.id)}
+                    >
                       <Trash2 className="w-4 h-4 mr-1" />
                       Delete
                     </Button>
