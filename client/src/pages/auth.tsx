@@ -67,17 +67,46 @@ export default function AuthPage() {
     <div className="min-h-screen flex overflow-hidden">
       {/* Left Side - FinSync Branding */}
       <div className="flex-1 relative overflow-hidden">
-        {/* Enhanced Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700">
-          <div className="absolute inset-0 bg-gradient-to-tl from-cyan-600/40 via-blue-500/30 to-emerald-400/20 animate-gradient-slow"></div>
-          <div className="absolute inset-0 bg-gradient-to-tr from-violet-800/50 via-transparent to-rose-600/30 animate-gradient-reverse"></div>
+        {/* Professional Fintech Abstract Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-violet-900">
+          <div className="absolute inset-0 bg-gradient-to-tl from-blue-800/60 via-violet-700/40 to-cyan-600/30 animate-gradient-flow"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-indigo-800/50 via-transparent to-teal-700/40 animate-gradient-wave"></div>
         </div>
         
-        {/* Animated Floating Elements */}
+        {/* Flowing Wave Patterns */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/8 rounded-full blur-3xl animate-float-slow"></div>
-          <div className="absolute top-3/4 right-1/4 w-80 h-80 bg-cyan-300/15 rounded-full blur-3xl animate-float-reverse"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-purple-300/12 rounded-full blur-3xl animate-float-slow"></div>
+          <div className="absolute top-0 left-0 w-full h-full">
+            <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+              <path className="animate-wave-flow" fill="url(#gradient1)" d="M0,400 C200,300 400,200 600,250 C800,300 1000,350 1200,300 C1400,250 1440,200 1440,200 L1440,900 L0,900 Z"/>
+              <path className="animate-wave-reverse" fill="url(#gradient2)" d="M0,500 C300,400 600,300 900,350 C1200,400 1440,450 1440,450 L1440,900 L0,900 Z"/>
+              <defs>
+                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3"/>
+                  <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.2"/>
+                  <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.1"/>
+                </linearGradient>
+                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.2"/>
+                  <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.15"/>
+                  <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.1"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        {/* Geometric Pattern Overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-cyan-400 rotate-45 animate-geometric-float"></div>
+          <div className="absolute top-2/3 right-1/3 w-24 h-24 border border-blue-400 rotate-12 animate-geometric-pulse"></div>
+          <div className="absolute bottom-1/4 left-1/2 w-20 h-20 border border-violet-400 -rotate-12 animate-geometric-drift"></div>
+        </div>
+        
+        {/* Futuristic Lighting Effects */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/3 left-1/6 w-80 h-80 bg-gradient-radial from-blue-500/20 via-blue-500/10 to-transparent rounded-full blur-2xl animate-glow-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-radial from-violet-500/15 via-violet-500/8 to-transparent rounded-full blur-3xl animate-glow-drift"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-radial from-cyan-400/12 via-cyan-400/6 to-transparent rounded-full blur-2xl animate-glow-rotate"></div>
         </div>
 
         {/* Branding Content */}
@@ -106,7 +135,7 @@ export default function AuthPage() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl text-blue-100 mb-8 max-w-md aesthetic-light"
+            className="text-xl text-slate-200 mb-8 max-w-md aesthetic-light"
           >
             Streamline your tax compliance with AI-powered invoice processing and real-time analytics
           </motion.p>
@@ -115,7 +144,7 @@ export default function AuthPage() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col space-y-4 text-sm text-cyan-200 aesthetic-body"
+            className="flex flex-col space-y-4 text-sm text-slate-300 aesthetic-body"
           >
             <div className="flex items-center space-x-3">
               <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
@@ -134,9 +163,9 @@ export default function AuthPage() {
       </div>
 
       {/* Right Side - Login Panel */}
-      <div className="w-96 bg-white relative overflow-hidden shadow-2xl">
+      <div className="w-96 bg-white relative overflow-hidden shadow-2xl border-l border-slate-200">
         {/* Subtle Right Panel Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-blue-50/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/50 to-blue-50/30"></div>
         
         <motion.div
           variants={containerVariants}
