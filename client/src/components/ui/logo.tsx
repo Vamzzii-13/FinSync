@@ -13,39 +13,54 @@ export function LogoText({ className, size = "md" }: LogoProps) {
   };
 
   return (
-    <div className={cn("flex items-center space-x-2", className)}>
-      <div className="bg-blue-600 text-white rounded-lg p-2">
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-          <path d="M14 2v6h6"/>
-          <path d="M16 13H8"/>
-          <path d="M16 17H8"/>
-          <path d="M10 9H8"/>
+    <div className={cn("flex items-center space-x-3", className)}>
+      <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white rounded-xl p-2.5 shadow-lg">
+        <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          {/* Modern Finance Icon with GST Elements */}
+          <rect x="3" y="4" width="18" height="16" rx="2" className="fill-white/10" />
+          <path d="M7 8h6" strokeLinecap="round" />
+          <path d="M7 12h8" strokeLinecap="round" />
+          <path d="M7 16h4" strokeLinecap="round" />
+          <circle cx="17" cy="12" r="2" className="fill-cyan-400/20 stroke-cyan-300" strokeWidth="1" />
+          <path d="M16 10l2 2 2-2" strokeLinecap="round" strokeLinejoin="round" className="stroke-cyan-300" strokeWidth="1" />
+          {/* Tax/Compliance indicator */}
+          <rect x="15" y="6" width="6" height="2" rx="1" className="fill-emerald-400/30" />
         </svg>
+        <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
       </div>
-      <span className={cn("font-bold text-gray-900", sizeClasses[size])}>
-        FinSync
-      </span>
+      <div className="flex flex-col">
+        <span className={cn("font-bold text-gray-900 aesthetic-heading tracking-tight", sizeClasses[size])}>
+          FinSync
+        </span>
+        <span className="text-xs text-gray-500 font-medium tracking-wide aesthetic-light -mt-1">
+          GST COMPLIANCE
+        </span>
+      </div>
     </div>
   );
 }
 
 export function Logo({ className, size = "md" }: LogoProps) {
   const sizeClasses = {
-    sm: "w-8 h-8",
-    md: "w-10 h-10", 
-    lg: "w-12 h-12"
+    sm: "w-10 h-10",
+    md: "w-12 h-12", 
+    lg: "w-16 h-16"
   };
 
   return (
-    <div className={cn("bg-blue-600 text-white rounded-lg p-2", sizeClasses[size], className)}>
-      <svg className="w-full h-full" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-        <path d="M14 2v6h6"/>
-        <path d="M16 13H8"/>
-        <path d="M16 17H8"/>
-        <path d="M10 9H8"/>
+    <div className={cn("relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white rounded-xl p-3 shadow-lg", sizeClasses[size], className)}>
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        {/* Professional Finance Document Icon */}
+        <rect x="3" y="4" width="18" height="16" rx="2" className="fill-white/10" />
+        <path d="M7 8h6" strokeLinecap="round" />
+        <path d="M7 12h8" strokeLinecap="round" />
+        <path d="M7 16h4" strokeLinecap="round" />
+        <circle cx="17" cy="12" r="2" className="fill-cyan-400/20 stroke-cyan-300" strokeWidth="1" />
+        <path d="M16 10l2 2 2-2" strokeLinecap="round" strokeLinejoin="round" className="stroke-cyan-300" strokeWidth="1" />
+        {/* Tax/GST compliance indicator */}
+        <rect x="15" y="6" width="6" height="2" rx="1" className="fill-emerald-400/30" />
       </svg>
+      <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
     </div>
   );
 }

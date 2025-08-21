@@ -117,7 +117,7 @@ export default function AuthPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-12"
           >
-            <LogoText className="justify-center mb-8 scale-150" />
+            <LogoText className="justify-center mb-8 scale-125" />
           </motion.div>
           
           <motion.div
@@ -127,10 +127,10 @@ export default function AuthPage() {
             className="mb-10"
           >
             <h1 className="text-5xl text-white mb-4 aesthetic-display tracking-tight">
-              Professional GST
+              Enterprise GST
             </h1>
             <h2 className="text-4xl text-cyan-300 aesthetic-heading tracking-tight">
-              Management Platform
+              Compliance Suite
             </h2>
           </motion.div>
           
@@ -140,7 +140,7 @@ export default function AuthPage() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-lg text-slate-200 mb-12 max-w-lg text-center aesthetic-light leading-relaxed"
           >
-            Streamline your tax compliance with AI-powered invoice processing and real-time analytics
+            Automate GST compliance with intelligent invoice processing, real-time validation, and comprehensive reporting
           </motion.p>
 
           <motion.div
@@ -151,15 +151,15 @@ export default function AuthPage() {
           >
             <div className="flex items-center justify-start space-x-4">
               <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse flex-shrink-0"></div>
-              <span className="text-left">AI-Powered Invoice Extraction</span>
+              <span className="text-left">Automated GST Return Filing</span>
             </div>
             <div className="flex items-center justify-start space-x-4">
               <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-pulse flex-shrink-0"></div>
-              <span className="text-left">Real-time Compliance Analytics</span>
+              <span className="text-left">Real-time Tax Compliance</span>
             </div>
             <div className="flex items-center justify-start space-x-4">
               <div className="w-2.5 h-2.5 bg-purple-400 rounded-full animate-pulse flex-shrink-0"></div>
-              <span className="text-left">Secure Enterprise Platform</span>
+              <span className="text-left">AI-Powered Invoice Processing</span>
             </div>
           </motion.div>
         </div>
