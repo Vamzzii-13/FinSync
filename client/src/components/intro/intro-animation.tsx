@@ -23,14 +23,12 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     setParticles(newParticles);
   }, []);
 
-  // 8-second animation sequence controller
+  // 5-second animation sequence controller (starting with icons)
   useEffect(() => {
     const timeline = [
-      { scene: 0, duration: 1600 }, // Data Atmosphere
-      { scene: 1, duration: 1800 }, // Geometric Pulse  
-      { scene: 2, duration: 1400 }, // Convergence Pulse
-      { scene: 3, duration: 2000 }, // Logo Reveal
-      { scene: 4, duration: 1200 }, // Final Tagline
+      { scene: 0, duration: 1500 }, // 3 Icons Animation (BarChart3, TrendingUp, Network)
+      { scene: 1, duration: 2000 }, // Logo Reveal
+      { scene: 2, duration: 1500 }, // Final Tagline
     ];
 
     let currentTimeout: NodeJS.Timeout;
@@ -98,125 +96,9 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
         ))}
       </div>
 
-      {/* Scene 0: Data Atmosphere (0-1.6s) */}
+      {/* Scene 0: 3 Icons Animation (0-1.5s) */}
       <AnimatePresence>
         {currentScene === 0 && (
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Rotating Digital Orbs */}
-            <div className="relative">
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-4 h-4 bg-blue-300/40 rounded-full blur-sm"
-                  style={{
-                    transform: `rotate(${i * 30}deg) translateX(120px)`,
-                  }}
-                  animate={{
-                    rotate: [0, 360],
-                    scale: [1, 1.3, 1],
-                    opacity: [0.4, 0.8, 0.4]
-                  }}
-                  transition={{
-                    duration: 3,
-                    delay: i * 0.1,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Code Streams */}
-            <motion.div
-              className="absolute text-blue-300/30 font-mono text-sm"
-              animate={{
-                x: [-200, 200],
-                opacity: [0, 0.6, 0]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            >
-              01011010...
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Scene 1: Geometric Pulse (1.6-3.4s) */}
-      <AnimatePresence>
-        {currentScene === 1 && (
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.2 }}
-            transition={{ duration: 0.4 }}
-          >
-            {/* Geometric Shapes */}
-            <div className="relative">
-              {/* Hexagon */}
-              <motion.div
-                className="absolute w-16 h-16 border-2 border-blue-400/60"
-                style={{
-                  clipPath: "polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)"
-                }}
-                initial={{ scale: 0, rotate: 0 }}
-                animate={{ 
-                  scale: [0, 1, 0.8],
-                  rotate: [0, 180, 360],
-                  borderColor: ["#60a5fa60", "#3b82f6", "#60a5fa60"]
-                }}
-                transition={{ duration: 1.8, ease: "easeInOut" }}
-              />
-
-              {/* Triangle */}
-              <motion.div
-                className="absolute w-16 h-16 border-2 border-blue-300/60"
-                style={{
-                  clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-                  left: "-40px",
-                  top: "40px"
-                }}
-                initial={{ scale: 0, rotate: 0 }}
-                animate={{ 
-                  scale: [0, 1, 0.8],
-                  rotate: [0, 120, 240],
-                  borderColor: ["#93c5fd60", "#60a5fa", "#93c5fd60"]
-                }}
-                transition={{ duration: 1.8, delay: 0.2, ease: "easeInOut" }}
-              />
-
-              {/* Circle */}
-              <motion.div
-                className="absolute w-16 h-16 border-2 border-white/60 rounded-full"
-                style={{
-                  left: "40px",
-                  top: "40px"
-                }}
-                initial={{ scale: 0 }}
-                animate={{ 
-                  scale: [0, 1, 0.8],
-                  borderColor: ["#ffffff60", "#ffffff", "#ffffff60"]
-                }}
-                transition={{ duration: 1.8, delay: 0.4, ease: "easeInOut" }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Scene 2: Icon Morphing (3.4-4.8s) */}
-      <AnimatePresence>
-        {currentScene === 2 && (
           <motion.div
             className="absolute inset-0 flex items-center justify-center"
             initial={{ opacity: 0 }}
@@ -253,9 +135,9 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
         )}
       </AnimatePresence>
 
-      {/* Scene 3: Logo Reveal (4.8-6.8s) */}
+      {/* Scene 1: Logo Reveal (1.5-3.5s) */}
       <AnimatePresence>
-        {currentScene === 3 && (
+        {currentScene === 1 && (
           <motion.div
             className="absolute inset-0 flex items-center justify-center"
             initial={{ opacity: 0 }}
@@ -319,9 +201,9 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
         )}
       </AnimatePresence>
 
-      {/* Scene 4: Final Tagline (6.8-8s) */}
+      {/* Scene 2: Final Tagline (3.5-5s) */}
       <AnimatePresence>
-        {currentScene === 4 && (
+        {currentScene === 2 && (
           <motion.div
             className="absolute inset-0 flex flex-col items-center justify-center"
             initial={{ opacity: 0 }}
