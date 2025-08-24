@@ -183,7 +183,7 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex overflow-hidden relative" ref={containerRef}>
+    <div className="h-screen flex overflow-hidden relative" ref={containerRef}>
       {/* Left Side - Modern Minimalist Branding */}
       <div className="flex-1 relative overflow-hidden">
         {/* Clean Gradient Background */}
@@ -291,19 +291,19 @@ export default function AuthPage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 flex flex-col justify-center h-full p-12"
+          className="relative z-10 flex flex-col justify-center h-full p-8 max-h-screen overflow-hidden"
           data-testid="auth-page"
         >
         {/* Modern Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
+            className="mb-6"
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
-              <Lock className="w-8 h-8 text-white" />
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg">
+              <Lock className="w-7 h-7 text-white" />
             </div>
           </motion.div>
           
@@ -311,7 +311,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-4xl font-bold text-gray-900 mb-4 tracking-tight"
+            className="text-3xl font-bold text-gray-900 mb-3 tracking-tight"
           >
             {isLogin ? "Welcome Back" : "Join FinSync"}
           </motion.h1>
@@ -319,7 +319,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-gray-600 text-lg font-light"
+            className="text-gray-600 text-base font-light"
           >
             {isLogin 
               ? "Access your dashboard" 
@@ -333,13 +333,13 @@ export default function AuthPage() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20"
+          className="bg-white/50 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-white/20 flex-1 max-h-[calc(100vh-240px)] overflow-y-auto"
         >
           <Card className="border-0 shadow-none bg-transparent">
             <CardContent className="p-0">
 
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-10 bg-gradient-to-r from-blue-50 to-violet-50 p-2 rounded-2xl border border-white/30">
+              <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-r from-blue-50 to-violet-50 p-2 rounded-2xl border border-white/30">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
@@ -358,7 +358,7 @@ export default function AuthPage() {
                 </TabsTrigger>
               </TabsList>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 {/* Registration fields */}
                 {!isLogin && (
                   <>
@@ -394,7 +394,7 @@ export default function AuthPage() {
                           onChange={(e) => handleInputChange("name", e.target.value)}
                           onFocus={() => handleFieldFocus('name')}
                           onBlur={(e) => handleFieldBlur('name', e.target.value)}
-                          className={`pl-11 py-4 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                          className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
                             focusedField === 'name' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
                             formErrors.name ? 'border-red-400 ring-4 ring-red-400/10' :
                             isFieldValid('name', formData.name) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
@@ -459,11 +459,11 @@ export default function AuthPage() {
                           onChange={(e) => handleInputChange("company", e.target.value)}
                           onFocus={() => handleFieldFocus('company')}
                           onBlur={(e) => handleFieldBlur('company', e.target.value)}
-                          className={`pl-11 py-3 transition-all duration-300 aesthetic-light ${
-                            focusedField === 'company' ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-lg transform scale-[1.02]' :
-                            formErrors.company ? 'border-red-500 ring-2 ring-red-500/20' :
-                            isFieldValid('company', formData.company) ? 'border-emerald-500 ring-2 ring-emerald-500/20' :
-                            'border-gray-300'
+                          className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                            focusedField === 'company' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
+                            formErrors.company ? 'border-red-400 ring-4 ring-red-400/10' :
+                            isFieldValid('company', formData.company) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
+                            'border-gray-200 hover:border-gray-300'
                           }`}
                           required={!isLogin}
                           data-testid="company-input"
@@ -527,11 +527,11 @@ export default function AuthPage() {
                       onChange={(e) => handleInputChange("email", e.target.value)}
                       onFocus={() => handleFieldFocus('email')}
                       onBlur={(e) => handleFieldBlur('email', e.target.value)}
-                      className={`pl-11 py-3 transition-all duration-300 aesthetic-light ${
-                        focusedField === 'email' ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-lg transform scale-[1.02]' :
-                        formErrors.email ? 'border-red-500 ring-2 ring-red-500/20' :
-                        isFieldValid('email', formData.email) ? 'border-emerald-500 ring-2 ring-emerald-500/20' :
-                        'border-gray-300'
+                      className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                        focusedField === 'email' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
+                        formErrors.email ? 'border-red-400 ring-4 ring-red-400/10' :
+                        isFieldValid('email', formData.email) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
+                        'border-gray-200 hover:border-gray-300'
                       }`}
                       required
                       data-testid="email-input"
@@ -593,11 +593,11 @@ export default function AuthPage() {
                       onChange={(e) => handleInputChange("password", e.target.value)}
                       onFocus={() => handleFieldFocus('password')}
                       onBlur={(e) => handleFieldBlur('password', e.target.value)}
-                      className={`pl-11 pr-20 py-3 transition-all duration-300 aesthetic-light ${
-                        focusedField === 'password' ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-lg transform scale-[1.02]' :
-                        formErrors.password ? 'border-red-500 ring-2 ring-red-500/20' :
-                        isFieldValid('password', formData.password) ? 'border-emerald-500 ring-2 ring-emerald-500/20' :
-                        'border-gray-300'
+                      className={`pl-11 pr-20 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                        focusedField === 'password' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
+                        formErrors.password ? 'border-red-400 ring-4 ring-red-400/10' :
+                        isFieldValid('password', formData.password) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
+                        'border-gray-200 hover:border-gray-300'
                       }`}
                       required
                       data-testid="password-input"
