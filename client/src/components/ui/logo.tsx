@@ -29,11 +29,8 @@ export function LogoText({ className, size = "md" }: LogoProps) {
         <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
       </div>
       <div className="flex flex-col">
-        <span className={cn("font-bold text-gray-900 aesthetic-heading tracking-tight", sizeClasses[size])}>
+        <span className={cn("font-bold text-white aesthetic-heading tracking-tight", sizeClasses[size])}>
           FinSync
-        </span>
-        <span className="text-xs text-gray-500 font-medium tracking-wide aesthetic-light -mt-1">
-          GST COMPLIANCE
         </span>
       </div>
     </div>
