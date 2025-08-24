@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, TrendingDown, DollarSign, FileText, Calendar, Activity } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import Sidebar from "@/components/dashboard/sidebar";
+import Header from "@/components/dashboard/header";
 
 // Sample Indian GST analytics data
 const monthlyGSTData = [
@@ -53,9 +55,19 @@ export default function AnalyticsPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="space-y-6"
+      className="min-h-screen flex bg-gray-50/50"
       data-testid="analytics-page"
     >
+      <Sidebar />
+      
+      <main className="flex-1 ml-64 min-h-screen">
+        <Header />
+        
+        <motion.div
+          variants={containerVariants}
+          className="p-6 space-y-6"
+          data-testid="analytics-content"
+        >
       {/* Header */}
       <motion.div variants={itemVariants}>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
@@ -295,6 +307,8 @@ export default function AnalyticsPage() {
           </CardContent>
         </Card>
       </motion.div>
+        </motion.div>
+      </main>
     </motion.div>
   );
 }

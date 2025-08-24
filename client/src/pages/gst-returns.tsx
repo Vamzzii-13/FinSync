@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Download, Eye, Plus, FileText, TrendingUp, AlertTriangle } from "lucide-react";
 import { format } from "date-fns";
 import type { GstReturn } from "@shared/schema";
+import Sidebar from "@/components/dashboard/sidebar";
+import Header from "@/components/dashboard/header";
 
 export default function GstReturnsPage() {
   const { data: gstReturns = [], isLoading } = useQuery<GstReturn[]>({
@@ -74,9 +76,19 @@ export default function GstReturnsPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="space-y-6"
+      className="min-h-screen flex bg-gray-50/50"
       data-testid="gst-returns-page"
     >
+      <Sidebar />
+      
+      <main className="flex-1 ml-64 min-h-screen">
+        <Header />
+        
+        <motion.div
+          variants={containerVariants}
+          className="p-6 space-y-6"
+          data-testid="gst-returns-content"
+        >
       {/* Header */}
       <motion.div variants={itemVariants} className="flex justify-between items-center">
         <div>
@@ -234,6 +246,8 @@ export default function GstReturnsPage() {
           </div>
         )}
       </motion.div>
+        </motion.div>
+      </main>
     </motion.div>
   );
 }

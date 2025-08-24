@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Download, FileSpreadsheet, Calendar, Package, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import type { DownloadHistory } from "@shared/schema";
+import Sidebar from "@/components/dashboard/sidebar";
+import Header from "@/components/dashboard/header";
 
 export default function ReportsPage() {
   const { data: reports = [], isLoading } = useQuery<DownloadHistory[]>({
@@ -70,13 +72,19 @@ export default function ReportsPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
-        <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
-        <div className="grid gap-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-24 bg-gray-100 rounded-lg animate-pulse"></div>
-          ))}
-        </div>
+      <div className="min-h-screen flex bg-gray-50/50">
+        <Sidebar />
+        <main className="flex-1 ml-64 min-h-screen">
+          <Header />
+          <div className="p-6 space-y-6">
+            <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
+            <div className="grid gap-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-24 bg-gray-100 rounded-lg animate-pulse"></div>
+              ))}
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -86,9 +94,19 @@ export default function ReportsPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="space-y-6"
+      className="min-h-screen flex bg-gray-50/50"
       data-testid="reports-page"
     >
+      <Sidebar />
+      
+      <main className="flex-1 ml-64 min-h-screen">
+        <Header />
+        
+        <motion.div
+          variants={containerVariants}
+          className="p-6 space-y-6"
+          data-testid="reports-content"
+        >
       {/* Header */}
       <motion.div variants={itemVariants} className="flex justify-between items-center">
         <div>
@@ -258,6 +276,8 @@ export default function ReportsPage() {
         )}
       </motion.div>
 
+        </motion.div>
+      </main>
     </motion.div>
   );
 }
