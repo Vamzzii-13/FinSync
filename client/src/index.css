@@ -621,6 +621,47 @@
   animation: slideUp 0.5s ease-out forwards;
 }
 
+/* FINSYNC Intro Animation Styles */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.animate-grid-flow {
+  animation: gridFlow 20s linear infinite;
+}
+
+@keyframes gridFlow {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
+/* Metallic gradient utilities */
+.bg-metallic {
+  background: linear-gradient(135deg, #94a3b8 0%, #1e40af 25%, #ffffff 50%, #1e40af 75%, #94a3b8 100%);
+}
+
+.text-metallic {
+  background: linear-gradient(135deg, #94a3b8 0%, #1e40af 25%, #ffffff 50%, #1e40af 75%, #94a3b8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Enhanced glow effects for intro */
+.intro-glow {
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.3),
+    0 0 40px rgba(59, 130, 246, 0.2),
+    0 0 80px rgba(59, 130, 246, 0.1);
+}
+
 .progress-bar {
   background: #3b82f6;
 }

@@ -12,15 +12,38 @@ import AnalyticsPage from "@/pages/analytics";
 import ReportsPage from "@/pages/reports";
 import InvoiceUploadPage from "@/pages/invoice-upload";
 import LoadingScreen from "@/components/ui/loading-screen";
+import IntroAnimation from "@/components/intro/intro-animation";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import { NotificationProvider } from "@/hooks/use-notification";
 import { useEffect, useState } from "react";
 
 function AppRouter() {
   const { user, isLoading } = useAuth();
-  
+  const [showIntro, setShowIntro] = useState(true);
+  const [hasSeenIntro, setHasSeenIntro] = useState(false);
+
+  // Check if user has seen intro in this session
+  useEffect(() => {
+    const introSeen = sessionStorage.getItem('intro-seen');
+    if (introSeen) {
+      setShowIntro(false);
+      setHasSeenIntro(true);
+    }
+  }, []);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    setHasSeenIntro(true);
+    sessionStorage.setItem('intro-seen', 'true');
+  };
+
   if (isLoading) {
     return <LoadingScreen />;
+  }
+
+  // Show intro animation on first visit or if not logged in
+  if (showIntro && !user && !hasSeenIntro) {
+    return <IntroAnimation onComplete={handleIntroComplete} />;
   }
 
   return (

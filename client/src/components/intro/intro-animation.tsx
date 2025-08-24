@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import finSyncLogo from "@assets/generated_images/FINSYNC_metallic_corporate_logo_c6ea7600.png";
 
 interface IntroAnimationProps {
   onComplete: () => void;
@@ -195,11 +194,18 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
               }}
             />
             
-            {/* Logo Image */}
-            <motion.img
-              src={finSyncLogo}
-              alt="FINSYNC"
-              className="w-80 h-auto relative z-10"
+            {/* FINSYNC Text with Metallic Effect */}
+            <motion.h1
+              className="text-6xl md:text-8xl font-bold relative z-10 select-none"
+              style={{
+                background: 'linear-gradient(135deg, #94a3b8 0%, #1e40af 25%, #ffffff 50%, #1e40af 75%, #94a3b8 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent',
+                textShadow: '0 0 30px rgba(59, 130, 246, 0.5)',
+                fontFamily: '"Inter", system-ui, sans-serif',
+                letterSpacing: '0.1em'
+              }}
               initial={{ 
                 opacity: 0, 
                 scale: 0.8,
@@ -215,7 +221,9 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                 delay: 0.3,
                 ease: "easeOut"
               }}
-            />
+            >
+              FINSYNC
+            </motion.h1>
 
             {/* Metallic shine effect */}
             <motion.div
