@@ -10,6 +10,7 @@ import DashboardPage from "@/pages/dashboard";
 import GstReturnsPage from "@/pages/gst-returns";
 import AnalyticsPage from "@/pages/analytics";
 import ReportsPage from "@/pages/reports";
+import InvoiceUploadPage from "@/pages/invoice-upload";
 import LoadingScreen from "@/components/ui/loading-screen";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import { NotificationProvider } from "@/hooks/use-notification";
@@ -31,7 +32,7 @@ function AppRouter() {
         <Route path="/gst-returns" component={user ? GstReturnsPage : AuthPage} />
         <Route path="/analytics" component={user ? AnalyticsPage : AuthPage} />
         <Route path="/reports" component={user ? ReportsPage : AuthPage} />
-        <Route path="/invoices" component={user ? DashboardPage : AuthPage} />
+        <Route path="/invoice-upload" component={user ? InvoiceUploadPage : AuthPage} />
         <Route path="/compliance" component={user ? DashboardPage : AuthPage} />
         <Route path="/settings" component={user ? DashboardPage : AuthPage} />
         <Route component={NotFound} />

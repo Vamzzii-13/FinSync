@@ -19,7 +19,7 @@ const navigation = [
   { name: "Dashboard", icon: Gauge, path: "/dashboard" },
   { name: "GST Returns", icon: File, path: "/gst-returns" },
   { name: "Analytics", icon: BarChart3, path: "/analytics" },
-  { name: "Invoices", icon: Receipt, path: "/invoices" },
+  { name: "Invoice Upload", icon: Receipt, path: "/invoice-upload" },
   { name: "Reports", icon: FileSpreadsheet, path: "/reports" },
   { name: "Compliance", icon: Shield, path: "/compliance" },
   { name: "Settings", icon: Settings, path: "/settings" },

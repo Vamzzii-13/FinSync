@@ -4,7 +4,6 @@ import Header from "@/components/dashboard/header";
 import StatsCards from "@/components/dashboard/stats-cards";
 import Charts from "@/components/dashboard/charts";
 import RecentActivities from "@/components/dashboard/recent-activities";
-import FileUpload from "@/components/dashboard/file-upload";
 
 export default function DashboardPage() {
   const containerVariants = {
@@ -57,9 +56,6 @@ export default function DashboardPage() {
             <RecentActivities />
           </motion.div>
           
-          <motion.div variants={itemVariants}>
-            <FileUpload />
-          </motion.div>
         </motion.div>
       </main>
     </motion.div>
