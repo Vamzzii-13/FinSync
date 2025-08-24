@@ -184,54 +184,36 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen flex overflow-hidden relative" ref={containerRef}>
-      {/* Left Side - FinSync Branding */}
+      {/* Left Side - Modern Minimalist Branding */}
       <div className="flex-1 relative overflow-hidden">
-        {/* Professional Fintech Abstract Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-violet-900">
-          <div className="absolute inset-0 bg-gradient-to-tl from-blue-800/60 via-violet-700/40 to-cyan-600/30 animate-gradient-flow"></div>
-          <div className="absolute inset-0 bg-gradient-to-tr from-indigo-800/50 via-transparent to-teal-700/40 animate-gradient-wave"></div>
+        {/* Clean Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-violet-900">
+          <div className="absolute inset-0 bg-gradient-to-tl from-blue-600/20 via-transparent to-violet-600/20"></div>
         </div>
         
-        {/* Flowing Wave Patterns */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full">
-            <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
-              <path className="animate-wave-flow" fill="url(#gradient1)" d="M0,400 C200,300 400,200 600,250 C800,300 1000,350 1200,300 C1400,250 1440,200 1440,200 L1440,900 L0,900 Z"/>
-              <path className="animate-wave-reverse" fill="url(#gradient2)" d="M0,500 C300,400 600,300 900,350 C1200,400 1440,450 1440,450 L1440,900 L0,900 Z"/>
-              <defs>
-                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3"/>
-                  <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.2"/>
-                  <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.1"/>
-                </linearGradient>
-                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.2"/>
-                  <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.15"/>
-                  <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.1"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+        {/* Subtle Geometric Pattern */}
+        <div className="absolute inset-0 opacity-5" 
+             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
         </div>
 
-        {/* Interactive Floating Particles */}
+        {/* Floating Orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {particles.map((particle) => (
+          {particles.slice(0, 8).map((particle) => (
             <motion.div
               key={particle.id}
-              className="absolute w-1 h-1 bg-white/20 rounded-full"
+              className="absolute w-2 h-2 bg-white/10 rounded-full blur-sm"
               initial={{
-                x: `${particle.x}vw`,
-                y: `${particle.y}vh`,
+                x: `${particle.x}%`,
+                y: `${particle.y}%`,
                 opacity: 0
               }}
               animate={{
-                x: `${particle.x + 20}vw`,
-                y: `${particle.y - 30}vh`,
+                x: `${particle.x + 10}%`,
+                y: `${particle.y - 20}%`,
                 opacity: [0, 0.6, 0]
               }}
               transition={{
-                duration: 8,
+                duration: 12,
                 delay: particle.delay,
                 repeat: Infinity,
                 ease: "easeInOut"
@@ -239,138 +221,69 @@ export default function AuthPage() {
             />
           ))}
         </div>
-        
-        {/* Geometric Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-cyan-400 rotate-45 animate-geometric-float"></div>
-          <div className="absolute top-2/3 right-1/3 w-24 h-24 border border-blue-400 rotate-12 animate-geometric-pulse"></div>
-          <div className="absolute bottom-1/4 left-1/2 w-20 h-20 border border-violet-400 -rotate-12 animate-geometric-drift"></div>
-          
-          {/* Dynamic Icons */}
-          <motion.div 
-            className="absolute top-1/6 right-1/4 text-cyan-300/30"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            <Shield className="w-8 h-8" />
-          </motion.div>
-          <motion.div 
-            className="absolute bottom-1/3 left-1/6 text-blue-300/30"
-            animate={{ y: [-10, 10, -10] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Zap className="w-6 h-6" />
-          </motion.div>
-          <motion.div 
-            className="absolute top-2/3 left-2/3 text-violet-300/30"
-            animate={{ scale: [0.8, 1.2, 0.8] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Star className="w-7 h-7" />
-          </motion.div>
-        </div>
-        
-        {/* Futuristic Lighting Effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/3 left-1/6 w-80 h-80 bg-gradient-radial from-blue-500/20 via-blue-500/10 to-transparent rounded-full blur-2xl animate-glow-pulse"></div>
-          <div className="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-radial from-violet-500/15 via-violet-500/8 to-transparent rounded-full blur-3xl animate-glow-drift"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-radial from-cyan-400/12 via-cyan-400/6 to-transparent rounded-full blur-2xl animate-glow-rotate"></div>
-        </div>
 
-        {/* Branding Content */}
-        <div className="relative z-10 flex flex-col justify-center items-center h-full px-16 py-12 text-center">
+        {/* Centered Content */}
+        <div className="relative z-10 flex flex-col justify-center items-center h-full px-16 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12"
+            className="mb-16"
           >
-            <LogoText className="justify-center mb-8 scale-125" />
+            <LogoText className="justify-center mb-8 scale-150" />
+            <motion.p 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-xl text-blue-200 font-light tracking-wider"
+            >
+              Enterprise GST Compliance Suite
+            </motion.p>
           </motion.div>
           
-          <motion.div
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-10"
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentTextIndex}
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 1.05 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-                className="text-center"
-              >
-                {dynamicTexts[currentTextIndex].split('\n').map((line, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.2 }}
-                  >
-                    {index === 0 ? (
-                      <h1 className="text-5xl text-white mb-4 aesthetic-display tracking-tight">
-                        {line}
-                      </h1>
-                    ) : (
-                      <h2 className="text-4xl text-cyan-300 aesthetic-heading tracking-tight">
-                        {line}
-                      </h2>
-                    )}
-                  </motion.div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-          
+          {/* Simple Feature Icons */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col space-y-5 text-base text-slate-300 aesthetic-body max-w-sm"
+            className="flex space-x-12"
           >
             {[
-              { icon: Check, text: "Automated GST Return Filing", color: "emerald" },
-              { icon: Shield, text: "Real-time Tax Compliance", color: "cyan" },
-              { icon: Zap, text: "AI-Powered Invoice Processing", color: "purple" }
+              { icon: Check, color: "text-emerald-400" },
+              { icon: Shield, color: "text-blue-400" },
+              { icon: Zap, color: "text-violet-400" }
             ].map((feature, index) => (
               <motion.div 
                 key={index}
-                className="flex items-center justify-start space-x-4 group"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 + index * 0.1 }}
-                whileHover={{ x: 10, transition: { duration: 0.2 } }}
+                className={`w-12 h-12 ${feature.color} opacity-60`}
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 1 + index * 0.2, duration: 0.6 }}
+                whileHover={{ scale: 1.1, opacity: 1 }}
               >
-                <div className={`w-8 h-8 bg-${feature.color}-400/20 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-${feature.color}-400/40`}>
-                  <feature.icon className={`w-4 h-4 text-${feature.color}-400`} />
-                </div>
-                <span className="text-left group-hover:text-white transition-colors duration-300">{feature.text}</span>
+                <feature.icon className="w-full h-full" />
               </motion.div>
             ))}
           </motion.div>
-          
         </div>
       </div>
 
-      {/* Right Side - Login Panel */}
-      <div className="w-96 bg-white relative overflow-hidden shadow-2xl border-l border-slate-200">
-        {/* Subtle Right Panel Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/50 to-blue-50/30"></div>
+      {/* Right Side - Modern Glass Login Panel */}
+      <div className="w-[480px] bg-white/95 backdrop-blur-xl relative overflow-hidden shadow-2xl border-l border-white/20">
+        {/* Glass Panel Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/60 to-blue-50/40 backdrop-blur-xl"></div>
         
-        {/* Interactive Light Rays */}
-        <div className="absolute inset-0 opacity-30">
+        {/* Subtle Light Effects */}
+        <div className="absolute inset-0 overflow-hidden">
           <motion.div 
-            className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-300/50 to-transparent"
-            animate={{ x: [-100, 400] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br from-blue-400/20 to-violet-400/20 rounded-full blur-3xl"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           />
           <motion.div 
-            className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-l from-transparent via-purple-300/50 to-transparent"
-            animate={{ x: [100, -400] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute -bottom-24 -left-24 w-48 h-48 bg-gradient-to-br from-violet-400/15 to-blue-400/15 rounded-full blur-3xl"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           />
         </div>
         
@@ -378,48 +291,60 @@ export default function AuthPage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 flex flex-col justify-center h-full p-8"
+          className="relative z-10 flex flex-col justify-center h-full p-12"
           data-testid="auth-page"
         >
-        {/* Header */}
-        <div className="text-center mb-10">
+        {/* Modern Header */}
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8"
+          >
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+              <Lock className="w-8 h-8 text-white" />
+            </div>
+          </motion.div>
+          
           <motion.h1 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl text-gray-900 mb-3 aesthetic-heading tracking-tight"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-4xl font-bold text-gray-900 mb-4 tracking-tight"
           >
-            {isLogin ? "Welcome Back" : "Get Started"}
+            {isLogin ? "Welcome Back" : "Join FinSync"}
           </motion.h1>
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-gray-600 aesthetic-light text-base"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-gray-600 text-lg font-light"
           >
             {isLogin 
-              ? "Sign in to access your dashboard" 
-              : "Create your FinSync account"
+              ? "Access your dashboard" 
+              : "Start your journey"
             }
           </motion.p>
         </div>
 
-        {/* Authentication Form */}
+        {/* Modern Authentication Form */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20"
         >
           <Card className="border-0 shadow-none bg-transparent">
             <CardContent className="p-0">
 
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-8 bg-gray-100 p-1">
+              <TabsList className="grid w-full grid-cols-2 mb-10 bg-gradient-to-r from-blue-50 to-violet-50 p-2 rounded-2xl border border-white/30">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
                   data-testid="login-tab"
-                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body py-3"
+                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
                 >
                   Sign In
                 </TabsTrigger>
@@ -427,7 +352,7 @@ export default function AuthPage() {
                   value="register" 
                   onClick={() => setIsLogin(false)}
                   data-testid="register-tab"
-                  className="text-gray-600 data-[state=active]:bg-white data-[state=active]:text-gray-900 aesthetic-body py-3"
+                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
                 >
                   Sign Up
                 </TabsTrigger>
@@ -469,11 +394,11 @@ export default function AuthPage() {
                           onChange={(e) => handleInputChange("name", e.target.value)}
                           onFocus={() => handleFieldFocus('name')}
                           onBlur={(e) => handleFieldBlur('name', e.target.value)}
-                          className={`pl-11 py-3 transition-all duration-300 aesthetic-light ${
-                            focusedField === 'name' ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-lg transform scale-[1.02]' :
-                            formErrors.name ? 'border-red-500 ring-2 ring-red-500/20' :
-                            isFieldValid('name', formData.name) ? 'border-emerald-500 ring-2 ring-emerald-500/20' :
-                            'border-gray-300'
+                          className={`pl-11 py-4 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                            focusedField === 'name' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
+                            formErrors.name ? 'border-red-400 ring-4 ring-red-400/10' :
+                            isFieldValid('name', formData.name) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
+                            'border-gray-200 hover:border-gray-300'
                           }`}
                           required={!isLogin}
                           data-testid="name-input"
@@ -721,7 +646,7 @@ export default function AuthPage() {
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full mt-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg aesthetic-button relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full mt-8 py-5 text-lg font-bold transition-all duration-300 transform rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-violet-600 hover:from-blue-700 hover:via-blue-800 hover:to-violet-700 hover:scale-[1.02] active:scale-[0.98] shadow-xl hover:shadow-2xl text-white relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
                     data-testid="submit-button"
                   >
                     <AnimatePresence mode="wait">
