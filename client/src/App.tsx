@@ -25,11 +25,11 @@ function AppRouter() {
   // Check if user has seen intro in this session
   useEffect(() => {
     const introSeen = sessionStorage.getItem('intro-seen');
-    if (introSeen) {
+    if (introSeen && user) {
       setShowIntro(false);
       setHasSeenIntro(true);
     }
-  }, []);
+  }, [user]);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
@@ -41,8 +41,8 @@ function AppRouter() {
     return <LoadingScreen />;
   }
 
-  // Show intro animation on first visit or if not logged in
-  if (showIntro && !user && !hasSeenIntro) {
+  // Show intro animation on first visit when not logged in
+  if (showIntro && !user) {
     return <IntroAnimation onComplete={handleIntroComplete} />;
   }
 
