@@ -291,19 +291,19 @@ export default function AuthPage() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 flex flex-col justify-center h-full p-8 max-h-screen overflow-hidden"
+          className="relative z-10 flex flex-col justify-center h-full p-8"
           data-testid="auth-page"
         >
         {/* Modern Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6"
+            className="mb-4"
           >
-            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg">
-              <Lock className="w-7 h-7 text-white" />
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl mx-auto mb-3 flex items-center justify-center shadow-lg">
+              <Lock className="w-6 h-6 text-white" />
             </div>
           </motion.div>
           
@@ -311,7 +311,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-3xl font-bold text-gray-900 mb-3 tracking-tight"
+            className="text-2xl font-bold text-gray-900 mb-2 tracking-tight"
           >
             {isLogin ? "Welcome Back" : "Join FinSync"}
           </motion.h1>
@@ -333,18 +333,18 @@ export default function AuthPage() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="bg-white/50 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-white/20 flex-1 max-h-[calc(100vh-240px)] overflow-y-auto"
+          className="bg-white/50 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-white/20"
         >
           <Card className="border-0 shadow-none bg-transparent">
             <CardContent className="p-0">
 
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6 bg-gradient-to-r from-blue-50 to-violet-50 p-2 rounded-2xl border border-white/30">
+              <TabsList className="grid w-full grid-cols-2 mb-4 bg-gradient-to-r from-blue-50 to-violet-50 p-1.5 rounded-2xl border border-white/30">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
                   data-testid="login-tab"
-                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
+                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300"
                 >
                   Sign In
                 </TabsTrigger>
@@ -352,7 +352,7 @@ export default function AuthPage() {
                   value="register" 
                   onClick={() => setIsLogin(false)}
                   data-testid="register-tab"
-                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
+                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300"
                 >
                   Sign Up
                 </TabsTrigger>
