@@ -325,41 +325,6 @@ export default function AuthPage() {
             </AnimatePresence>
           </motion.div>
           
-          <motion.p 
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg text-slate-200 mb-12 max-w-lg text-center aesthetic-light leading-relaxed"
-          >
-            Automate GST compliance with intelligent invoice processing, real-time validation, and comprehensive reporting
-          </motion.p>
-
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col space-y-5 text-base text-slate-300 aesthetic-body max-w-sm"
-          >
-            {[
-              { icon: Check, text: "Automated GST Return Filing", color: "emerald" },
-              { icon: Shield, text: "Real-time Tax Compliance", color: "cyan" },
-              { icon: Zap, text: "AI-Powered Invoice Processing", color: "purple" }
-            ].map((feature, index) => (
-              <motion.div 
-                key={index}
-                className="flex items-center justify-start space-x-4 group"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 + index * 0.1 }}
-                whileHover={{ x: 10, transition: { duration: 0.2 } }}
-              >
-                <div className={`w-8 h-8 bg-${feature.color}-400/20 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-${feature.color}-400/40`}>
-                  <feature.icon className={`w-4 h-4 text-${feature.color}-400`} />
-                </div>
-                <span className="text-left group-hover:text-white transition-colors duration-300">{feature.text}</span>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </div>
 
