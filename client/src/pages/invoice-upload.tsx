@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Upload } from "lucide-react";
 import Sidebar from "@/components/dashboard/sidebar";
 import Header from "@/components/dashboard/header";
 import FileUpload from "@/components/dashboard/file-upload";
@@ -35,24 +36,18 @@ export default function InvoiceUploadPage() {
       <Sidebar />
       
       <main className="flex-1 ml-64 min-h-screen">
-        <Header />
+        <Header 
+          title="Invoice Upload"
+          subtitle="Upload invoices to extract GST details and generate Excel reports."
+          icon={<Upload className="w-6 h-6 text-blue-600" />}
+        />
         
         <motion.div
           variants={containerVariants}
           className="p-6 space-y-8"
           data-testid="invoice-upload-content"
         >
-          {/* Page Header */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                Invoice Upload
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Upload invoices to extract GST details and generate Excel reports
-              </p>
-            </div>
-          </motion.div>
+
 
           {/* File Upload Section */}
           <motion.div variants={itemVariants}>

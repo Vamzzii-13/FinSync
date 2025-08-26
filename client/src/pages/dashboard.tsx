@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { LayoutDashboard } from "lucide-react";
 import Sidebar from "@/components/dashboard/sidebar";
 import Header from "@/components/dashboard/header";
 import StatsCards from "@/components/dashboard/stats-cards";
@@ -37,7 +38,11 @@ export default function DashboardPage() {
       <Sidebar />
       
       <main className="flex-1 ml-64 min-h-screen">
-        <Header />
+        <Header 
+          title="Dashboard Overview"
+          subtitle="Welcome back! Here's what's happening with your GST compliance."
+          icon={<LayoutDashboard className="w-6 h-6 text-blue-600" />}
+        />
         
         <motion.div
           variants={containerVariants}

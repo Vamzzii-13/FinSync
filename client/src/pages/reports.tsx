@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, FileSpreadsheet, Calendar, Package, Trash2 } from "lucide-react";
+import { Download, FileSpreadsheet, Calendar, Package, Trash2, FileBarChart } from "lucide-react";
 import { format } from "date-fns";
 import type { DownloadHistory } from "@shared/schema";
 import Sidebar from "@/components/dashboard/sidebar";
@@ -75,7 +75,11 @@ export default function ReportsPage() {
       <div className="min-h-screen flex bg-gray-50/50">
         <Sidebar />
         <main className="flex-1 ml-64 min-h-screen">
-          <Header />
+          <Header 
+            title="Reports"
+            subtitle="Download and manage your generated GST Excel documents."
+            icon={<FileBarChart className="w-6 h-6 text-blue-600" />}
+          />
           <div className="p-6 space-y-6">
             <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
             <div className="grid gap-4">
@@ -100,24 +104,18 @@ export default function ReportsPage() {
       <Sidebar />
       
       <main className="flex-1 ml-64 min-h-screen">
-        <Header />
+        <Header 
+          title="Reports"
+          subtitle="Download and manage your generated GST Excel documents."
+          icon={<FileBarChart className="w-6 h-6 text-blue-600" />}
+        />
         
         <motion.div
           variants={containerVariants}
           className="p-6 space-y-6"
           data-testid="reports-content"
         >
-      {/* Header */}
-      <motion.div variants={itemVariants} className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-            Excel Reports
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
-            Download and manage your generated GST Excel documents
-          </p>
-        </div>
-      </motion.div>
+
 
       {/* Statistics */}
       <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-6">

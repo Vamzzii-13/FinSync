@@ -154,7 +154,11 @@ export default function CompliancePage() {
       <Sidebar />
       
       <main className="flex-1 ml-64 min-h-screen">
-        <Header />
+        <Header 
+          title="Compliance"
+          subtitle="Monitor your GST compliance status and regulatory requirements."
+          icon={<Shield className="w-6 h-6 text-blue-600" />}
+        />
         
         <motion.div
           variants={containerVariants}

@@ -6,7 +6,13 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { useAuth } from "@/hooks/use-auth";
 import { Bell, Search, User, LogOut, Settings, UserCircle } from "lucide-react";
 
-export default function Header() {
+interface HeaderProps {
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+}
+
+export default function Header({ title, subtitle, icon }: HeaderProps) {
   const { user, logout } = useAuth();
 
   const headerVariants = {
@@ -27,13 +33,18 @@ export default function Header() {
       data-testid="dashboard-header"
     >
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800" data-testid="header-title">
-            Dashboard Overview
-          </h1>
-          <p className="text-gray-600 mt-1" data-testid="header-subtitle">
-            Welcome back! Here's what's happening with your GST compliance.
-          </p>
+        <div className="flex items-center space-x-3">
+          <div className="p-3 bg-blue-100 rounded-full">
+            {icon}
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-800" data-testid="header-title">
+              {title}
+            </h1>
+            <p className="text-gray-600 mt-1" data-testid="header-subtitle">
+              {subtitle}
+            </p>
+          </div>
         </div>
         
         <div className="flex items-center space-x-4">

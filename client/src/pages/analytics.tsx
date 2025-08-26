@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, TrendingDown, DollarSign, FileText, Calendar, Activity } from "lucide-react";
+import { TrendingUp, TrendingDown, DollarSign, FileText, Calendar, Activity, BarChart3 } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
 import Sidebar from "@/components/dashboard/sidebar";
 import Header from "@/components/dashboard/header";
@@ -63,7 +63,11 @@ export default function AnalyticsPage() {
       <Sidebar />
       
       <main className="flex-1 ml-64 min-h-screen">
-        <Header />
+        <Header 
+          title="Analytics"
+          subtitle="View GST collection trends and compliance analytics across India."
+          icon={<BarChart3 className="w-6 h-6 text-blue-600" />}
+        />
         
         <motion.div
           variants={containerVariants}

@@ -82,7 +82,11 @@ export default function GstReturnsPage() {
       <Sidebar />
       
       <main className="flex-1 ml-64 min-h-screen">
-        <Header />
+        <Header 
+          title="GST Returns"
+          subtitle="Manage your GST return filings and track compliance status."
+          icon={<FileText className="w-6 h-6 text-blue-600" />}
+        />
         
         <motion.div
           variants={containerVariants}
