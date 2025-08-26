@@ -55,24 +55,41 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 bg-gradient-to-br from-gray-900 via-blue-950 to-cyan-900 flex items-center justify-center overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
       data-testid="intro-animation"
     >
-      {/* Digital Grid Background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-grid-pattern animate-grid-flow" />
+      {/* Animated Network Grid Background */}
+      <div className="absolute inset-0 opacity-30">
+        <motion.div 
+          className="absolute inset-0"
+          animate={{ 
+            backgroundPosition: ["0% 0%", "100% 100%"] 
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: "linear" 
+          }}
+          style={{
+            backgroundImage: `
+              linear-gradient(90deg, transparent 98%, rgba(6, 182, 212, 0.3) 100%),
+              linear-gradient(180deg, transparent 98%, rgba(6, 182, 212, 0.3) 100%)
+            `,
+            backgroundSize: '60px 60px'
+          }}
+        />
       </div>
 
-      {/* Digital Particles Field */}
+      {/* Enhanced Floating Particles */}
       <div className="absolute inset-0">
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute rounded-full bg-blue-400/60 blur-sm"
+            className="absolute rounded-full bg-gradient-to-r from-cyan-400/70 to-blue-500/70 shadow-cyan-400/50 shadow-lg"
             style={{
               left: `${particle.x}%`,
               top: `${particle.y}%`,
@@ -123,9 +140,9 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                   }}
                 >
                   <Icon 
-                    className="w-full h-full text-blue-300"
+                    className="w-full h-full text-cyan-300"
                     style={{
-                      filter: "drop-shadow(0 0 8px rgba(59, 130, 246, 0.6))"
+                      filter: "drop-shadow(0 0 12px rgba(6, 182, 212, 0.8))"
                     }}
                   />
                 </motion.div>
@@ -145,39 +162,38 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Convergence Effect */}
+            {/* Enhanced Convergence Effect */}
             <motion.div
               className="absolute inset-0"
               initial={{ scale: 2, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.3 }}
+              animate={{ scale: 1, opacity: 0.4 }}
               transition={{ duration: 1 }}
             >
-              <div className="absolute inset-0 bg-gradient-radial from-blue-500/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-radial from-cyan-500/30 via-blue-600/20 to-transparent" />
             </motion.div>
 
-            {/* FINSYNC Logo */}
+            {/* Enhanced FINSYNC Logo */}
             <motion.div
               className="relative text-center"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              initial={{ scale: 0.5, opacity: 0, rotateY: 180 }}
+              animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
             >
               <motion.div
                 style={{
-                  background: 'linear-gradient(135deg, #C8D3E3 0%, #89A4C7 50%, #FFFFFF 100%)',
+                  background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #ffffff 100%)',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
-                  fontSize: '4rem',
+                  fontSize: '4.5rem',
                   fontWeight: 800,
                   letterSpacing: '0.1em',
-                  textShadow: '0 0 30px rgba(59, 130, 246, 0.8)',
                 }}
                 animate={{
-                  textShadow: [
-                    '0 0 30px rgba(59, 130, 246, 0.8)',
-                    '0 0 50px rgba(59, 130, 246, 1)',
-                    '0 0 30px rgba(59, 130, 246, 0.8)'
+                  filter: [
+                    'drop-shadow(0 0 20px rgba(6, 182, 212, 0.8))',
+                    'drop-shadow(0 0 40px rgba(6, 182, 212, 1))',
+                    'drop-shadow(0 0 20px rgba(6, 182, 212, 0.8))'
                   ]
                 }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -185,13 +201,16 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                 FINSYNC
               </motion.div>
 
-              {/* Metallic shine effect */}
+              {/* Enhanced Cyan shine effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent -skew-x-12"
+                style={{
+                  filter: 'blur(1px)'
+                }}
                 initial={{ x: "-100%" }}
                 animate={{ x: "200%" }}
                 transition={{
-                  duration: 1.5,
+                  duration: 2,
                   delay: 0.5,
                   ease: "easeInOut"
                 }}
@@ -215,35 +234,42 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
             <motion.div
               className="text-4xl font-bold text-white mb-8"
               style={{
-                background: 'linear-gradient(135deg, #C8D3E3 0%, #89A4C7 50%, #FFFFFF 100%)',
+                background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #ffffff 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 color: 'transparent',
-                letterSpacing: '0.05em'
+                letterSpacing: '0.05em',
+                filter: 'drop-shadow(0 0 15px rgba(6, 182, 212, 0.6))'
               }}
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
+              initial={{ y: -20, opacity: 0, scale: 0.8 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
               FINSYNC
             </motion.div>
 
-            {/* Tagline */}
+            {/* Enhanced Tagline */}
             <motion.p
-              className="text-xl text-blue-200 font-medium tracking-wide"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-xl text-cyan-200 font-medium tracking-wide"
+              style={{
+                filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.4))'
+              }}
+              initial={{ y: 20, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             >
               Empowering Finance. Enabling Growth.
             </motion.p>
 
-            {/* Underline Animation */}
+            {/* Enhanced Underline Animation */}
             <motion.div
-              className="h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent mt-4"
-              initial={{ width: 0 }}
-              animate={{ width: "300px" }}
-              transition={{ duration: 1, delay: 0.6 }}
+              className="h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-6 rounded-full"
+              style={{
+                boxShadow: '0 0 20px rgba(6, 182, 212, 0.6)'
+              }}
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: "350px", opacity: 1 }}
+              transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
             />
           </motion.div>
         )}
