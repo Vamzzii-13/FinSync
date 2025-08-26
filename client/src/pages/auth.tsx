@@ -260,12 +260,12 @@ export default function AuthPage() {
             <CardContent className="p-0">
 
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-4 bg-gradient-to-r from-black/20 to-blue-900/30 p-1.5 rounded-2xl border border-cyan-400/30">
+              <TabsList className="grid w-full grid-cols-2 mb-4 bg-gradient-to-r from-black/40 to-blue-900/40 p-1 rounded-2xl border border-cyan-400/40 backdrop-blur-sm">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
                   data-testid="login-tab"
-                  className="text-cyan-200 font-medium data-[state=active]:bg-cyan-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300 border data-[state=active]:border-cyan-400/50"
+                  className="text-cyan-300/80 font-medium data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/30 data-[state=active]:to-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-cyan-500/20 rounded-xl py-3 transition-all duration-300 data-[state=active]:border data-[state=active]:border-cyan-400/60 hover:text-cyan-200"
                 >
                   Sign In
                 </TabsTrigger>
@@ -273,7 +273,7 @@ export default function AuthPage() {
                   value="register" 
                   onClick={() => setIsLogin(false)}
                   data-testid="register-tab"
-                  className="text-cyan-200 font-medium data-[state=active]:bg-cyan-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300 border data-[state=active]:border-cyan-400/50"
+                  className="text-cyan-300/80 font-medium data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/30 data-[state=active]:to-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-cyan-500/20 rounded-xl py-3 transition-all duration-300 data-[state=active]:border data-[state=active]:border-cyan-400/60 hover:text-cyan-200"
                 >
                   Sign Up
                 </TabsTrigger>
@@ -567,7 +567,7 @@ export default function AuthPage() {
                   <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full mt-8 py-5 text-lg font-bold transition-all duration-300 transform rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-violet-600 hover:from-blue-700 hover:via-blue-800 hover:to-violet-700 hover:scale-[1.02] active:scale-[0.98] shadow-xl hover:shadow-2xl text-white relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full mt-8 py-5 text-lg font-bold transition-all duration-300 transform rounded-2xl bg-gradient-to-r from-cyan-600 via-cyan-700 to-blue-600 hover:from-cyan-700 hover:via-cyan-800 hover:to-blue-700 hover:scale-[1.02] active:scale-[0.98] shadow-xl hover:shadow-2xl shadow-cyan-500/20 text-white relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed border border-cyan-400/30"
                     data-testid="submit-button"
                   >
                     <AnimatePresence mode="wait">
@@ -670,7 +670,7 @@ export default function AuthPage() {
         
         {/* Professional Progress Indicator */}
         <motion.div 
-          className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500"
+          className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
