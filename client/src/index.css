@@ -939,3 +939,24 @@
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #2563eb, #7c3aed);
 }
+
+/* Override Radix UI Tabs styling for dark theme */
+[data-radix-collection-item] {
+  background: transparent !important;
+}
+
+[role="tablist"] {
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+[role="tab"] {
+  background: transparent !important;
+  color: rgba(103, 232, 249, 0.8) !important;
+}
+
+[role="tab"][data-state="active"] {
+  background: linear-gradient(to right, rgba(6, 182, 212, 0.3), rgba(59, 130, 246, 0.3)) !important;
+  color: white !important;
+  box-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.2) !important;
+  border: 1px solid rgba(6, 182, 212, 0.6) !important;
+}

@@ -260,7 +260,7 @@ export default function AuthPage() {
             <CardContent className="p-0">
 
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-4 bg-gradient-to-r from-black/40 to-blue-900/40 p-1 rounded-2xl border border-cyan-400/40 backdrop-blur-sm">
+              <TabsList className="grid w-full grid-cols-2 mb-4 bg-black/60 p-1 rounded-2xl border border-cyan-400/40 backdrop-blur-sm shadow-lg">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
