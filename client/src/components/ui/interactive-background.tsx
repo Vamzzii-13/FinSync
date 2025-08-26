@@ -179,16 +179,16 @@ export function InteractiveBackground({ className = "" }: InteractiveBackgroundP
         }
       });
 
-      // FinSync Title
-      ctx.font = "bold 64px Arial";
+      // FinSync Title - positioned left of center
+      ctx.font = "bold 72px Arial";
       ctx.fillStyle = "rgba(0,180,255,0.95)";
       ctx.textAlign = "center";
-      ctx.fillText("FinSync", width / 2, height / 2 - 30);
+      ctx.fillText("FinSync", width * 0.35, height / 2 - 30);
 
-      // Slogan
-      ctx.font = "20px Arial";
+      // Slogan - positioned left of center
+      ctx.font = "22px Arial";
       ctx.fillStyle = "rgba(200,230,255,0.8)";
-      ctx.fillText("Synchronizing Finance with Innovation", width / 2, height / 2 + 20);
+      ctx.fillText("Synchronizing Finance with Innovation", width * 0.35, height / 2 + 25);
 
       animationIdRef.current = requestAnimationFrame(animate);
     };
