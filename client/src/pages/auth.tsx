@@ -188,8 +188,8 @@ export default function AuthPage() {
       {/* Full Screen Interactive Financial Network Background */}
       <InteractiveBackground className="z-0" />
       
-      {/* Centered Small Login Panel */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
+      {/* Right Side Small Login Panel */}
+      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-10">
         <div className="w-[380px] bg-white/95 backdrop-blur-xl relative overflow-hidden shadow-2xl rounded-2xl border border-white/30">
           {/* Glass Panel Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-blue-50/60 backdrop-blur-xl rounded-2xl"></div>
@@ -677,6 +677,7 @@ export default function AuthPage() {
           style={{ transformOrigin: "left" }}
         />
       </motion.div>
+        </div>
       </div>
     </div>
   );
