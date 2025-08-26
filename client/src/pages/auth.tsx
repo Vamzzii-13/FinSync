@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LogoText } from "@/components/ui/logo";
+import { InteractiveBackground } from "@/components/ui/interactive-background";
 import { Mail, Lock, User, Building, Eye, EyeOff, Check, AlertCircle, Loader2, Shield, Zap, Star } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
@@ -184,88 +185,10 @@ export default function AuthPage() {
 
   return (
     <div className="h-screen flex overflow-hidden relative" ref={containerRef}>
-      {/* Left Side - Modern Minimalist Branding */}
+      {/* Left Side - Interactive Financial Network Background */}
       <div className="flex-1 relative overflow-hidden">
-        {/* Clean Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-slate-900 to-violet-900">
-          <div className="absolute inset-0 bg-gradient-to-tl from-blue-600/20 via-transparent to-violet-600/20"></div>
-        </div>
-        
-        {/* Subtle Geometric Pattern */}
-        <div className="absolute inset-0 opacity-5" 
-             style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}>
-        </div>
-
-        {/* Floating Orbs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {particles.slice(0, 8).map((particle) => (
-            <motion.div
-              key={particle.id}
-              className="absolute w-2 h-2 bg-white/10 rounded-full blur-sm"
-              initial={{
-                x: `${particle.x}%`,
-                y: `${particle.y}%`,
-                opacity: 0
-              }}
-              animate={{
-                x: `${particle.x + 10}%`,
-                y: `${particle.y - 20}%`,
-                opacity: [0, 0.6, 0]
-              }}
-              transition={{
-                duration: 12,
-                delay: particle.delay,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Centered Content */}
-        <div className="relative z-10 flex flex-col justify-center items-center h-full px-16 text-center">
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-16"
-          >
-            <LogoText className="justify-center mb-8 scale-150" />
-            <motion.p 
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-xl text-blue-200 font-light tracking-wider"
-            >
-              Enterprise GST Compliance Suite
-            </motion.p>
-          </motion.div>
-          
-          {/* Simple Feature Icons */}
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex space-x-12"
-          >
-            {[
-              { icon: Check, color: "text-emerald-400" },
-              { icon: Shield, color: "text-blue-400" },
-              { icon: Zap, color: "text-violet-400" }
-            ].map((feature, index) => (
-              <motion.div 
-                key={index}
-                className={`w-12 h-12 ${feature.color} opacity-60`}
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 1 + index * 0.2, duration: 0.6 }}
-                whileHover={{ scale: 1.1, opacity: 1 }}
-              >
-                <feature.icon className="w-full h-full" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+        {/* Interactive Canvas Background */}
+        <InteractiveBackground className="z-0" />
       </div>
 
       {/* Right Side - Modern Glass Login Panel */}
