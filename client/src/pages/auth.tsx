@@ -184,38 +184,37 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="h-screen flex overflow-hidden relative" ref={containerRef}>
-      {/* Left Side - Interactive Financial Network Background */}
-      <div className="flex-1 relative overflow-hidden">
-        <InteractiveBackground className="z-0" />
-      </div>
-
-      {/* Right Side - Modern Glass Login Panel */}
-      <div className="w-[480px] bg-white/95 backdrop-blur-xl relative overflow-hidden shadow-2xl border-l border-white/20">
-        {/* Glass Panel Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/60 to-blue-50/40 backdrop-blur-xl"></div>
-        
-        {/* Subtle Light Effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div 
-            className="absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br from-blue-400/20 to-violet-400/20 rounded-full blur-3xl"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div 
-            className="absolute -bottom-24 -left-24 w-48 h-48 bg-gradient-to-br from-violet-400/15 to-blue-400/15 rounded-full blur-3xl"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
-        
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 flex flex-col justify-center h-full p-8"
-          data-testid="auth-page"
-        >
+    <div className="h-screen relative overflow-hidden" ref={containerRef}>
+      {/* Full Screen Interactive Financial Network Background */}
+      <InteractiveBackground className="z-0" />
+      
+      {/* Centered Small Login Panel */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="w-[380px] bg-white/95 backdrop-blur-xl relative overflow-hidden shadow-2xl rounded-2xl border border-white/30">
+          {/* Glass Panel Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-blue-50/60 backdrop-blur-xl rounded-2xl"></div>
+          
+          {/* Subtle Light Effects */}
+          <div className="absolute inset-0 overflow-hidden rounded-2xl">
+            <motion.div 
+              className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-blue-400/15 to-violet-400/15 rounded-full blur-2xl"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div 
+              className="absolute -bottom-16 -left-16 w-32 h-32 bg-gradient-to-br from-violet-400/10 to-blue-400/10 rounded-full blur-2xl"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            />
+          </div>
+          
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="relative z-10 p-6"
+            data-testid="auth-page"
+          >
         {/* Modern Header */}
         <div className="text-center mb-6">
           <motion.div
