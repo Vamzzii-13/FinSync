@@ -57,7 +57,12 @@ function App() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Add minimum mount time for consistent loading experience
+    const mountTimer = setTimeout(() => {
+      setMounted(true);
+    }, 1000); // 1 second initial delay
+
+    return () => clearTimeout(mountTimer);
   }, []);
 
   if (!mounted) {

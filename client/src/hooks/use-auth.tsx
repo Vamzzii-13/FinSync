@@ -25,24 +25,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Check for existing session on app start
-    const savedUser = localStorage.getItem("finsync_user");
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        // Clear invalid data if JSON parsing fails
-        localStorage.removeItem("finsync_user");
+    // Check for existing session on app start with extended loading time
+    const initializeAuth = async () => {
+      const savedUser = localStorage.getItem("finsync_user");
+      if (savedUser) {
+        try {
+          setUser(JSON.parse(savedUser));
+        } catch (error) {
+          // Clear invalid data if JSON parsing fails
+          localStorage.removeItem("finsync_user");
+        }
       }
-    }
-    setIsLoading(false);
+      
+      // Add minimum loading time of 3-5 seconds for better UX
+      const minLoadTime = 3000 + Math.random() * 2000; // 3-5 seconds
+      await new Promise(resolve => setTimeout(resolve, minLoadTime));
+      setIsLoading(false);
+    };
+
+    initializeAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Extended loading time for better loading screen experience
+      const loadingTime = 3500 + Math.random() * 1500; // 3.5-5 seconds
+      await new Promise(resolve => setTimeout(resolve, loadingTime));
       
       const userData: User = {
         id: "1",
@@ -65,8 +74,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = async (userData: any) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Extended loading time for registration
+      const loadingTime = 4000 + Math.random() * 1000; // 4-5 seconds
+      await new Promise(resolve => setTimeout(resolve, loadingTime));
       
       const newUser: User = {
         id: Date.now().toString(),
