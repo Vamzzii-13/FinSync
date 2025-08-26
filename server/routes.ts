@@ -30,6 +30,15 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Ensure temp_uploads directory exists
+  const fs = await import('fs');
+  const tempDir = 'temp_uploads';
+  try {
+    await fs.promises.access(tempDir);
+  } catch {
+    await fs.promises.mkdir(tempDir, { recursive: true });
+  }
+
   // GST extraction endpoint - direct Python integration
   app.post('/api/extract-gst', upload.array('files'), async (req, res) => {
     try {
@@ -43,20 +52,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const tempFiles: string[] = [];
       for (const file of files) {
         const tempPath = `temp_uploads/${Date.now()}_${file.originalname}`;
-        await import('fs').then(fs => 
-          fs.promises.writeFile(tempPath, file.buffer)
-        );
+        await fs.promises.writeFile(tempPath, file.buffer);
         tempFiles.push(tempPath);
       }
       
       // Process files with Python backend
       const { spawn } = await import('child_process');
-      const pythonProcess = spawn('python', [
+      const pythonProcess = spawn('python3', [
         'python_backend/simple_server.py',
         ...tempFiles
       ], {
         cwd: process.cwd(),
-        env: { ...process.env, PYTHONPATH: 'python_backend' }
+        env: { 
+          ...process.env, 
+          PYTHONPATH: `${process.cwd()}/python_backend:${process.env.PYTHONPATH || ''}` 
+        }
       });
       
       let output = '';
@@ -74,7 +84,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Cleanup temp files
         for (const tempFile of tempFiles) {
           try {
-            await import('fs').then(fs => fs.promises.unlink(tempFile));
+            await fs.promises.unlink(tempFile);
           } catch (e) {
             console.log('Failed to cleanup temp file:', tempFile);
           }
