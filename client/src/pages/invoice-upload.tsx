@@ -39,7 +39,7 @@ export default function InvoiceUploadPage() {
         <Header 
           title="Invoice Upload"
           subtitle="Upload invoices to extract GST details and generate Excel reports."
-          icon={<Upload className="w-6 h-6 text-blue-600" />}
+          icon={<Upload className="w-7 h-7 text-white" />}
         />
         
         <motion.div

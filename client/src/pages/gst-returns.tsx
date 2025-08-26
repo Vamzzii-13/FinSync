@@ -85,7 +85,7 @@ export default function GstReturnsPage() {
         <Header 
           title="GST Returns"
           subtitle="Manage your GST return filings and track compliance status."
-          icon={<FileText className="w-6 h-6 text-blue-600" />}
+          icon={<FileText className="w-7 h-7 text-white" />}
         />
         
         <motion.div

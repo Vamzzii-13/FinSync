@@ -64,9 +64,9 @@ export default function AnalyticsPage() {
       
       <main className="flex-1 ml-64 min-h-screen">
         <Header 
-          title="Analytics"
-          subtitle="View GST collection trends and compliance analytics across India."
-          icon={<BarChart3 className="w-6 h-6 text-blue-600" />}
+          title="GST Analytics & Insights FY 2024-25"
+          subtitle="Real-time analytics based on Government of India GST data and current compliance norms."
+          icon={<BarChart3 className="w-7 h-7 text-white" />}
         />
         
         <motion.div
@@ -74,15 +74,6 @@ export default function AnalyticsPage() {
           className="p-6 space-y-6"
           data-testid="analytics-content"
         >
-      {/* Header */}
-      <motion.div variants={itemVariants}>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-          GST Analytics & Insights FY 2024-25
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-1">
-          Real-time analytics based on Government of India GST data and current compliance norms
-        </p>
-      </motion.div>
 
       {/* Key Metrics */}
       <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-4 gap-6">

@@ -157,7 +157,7 @@ export default function CompliancePage() {
         <Header 
           title="Compliance"
           subtitle="Monitor your GST compliance status and regulatory requirements."
-          icon={<Shield className="w-6 h-6 text-blue-600" />}
+          icon={<Shield className="w-7 h-7 text-white" />}
         />
         
         <motion.div

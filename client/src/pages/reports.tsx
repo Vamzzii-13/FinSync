@@ -78,7 +78,7 @@ export default function ReportsPage() {
           <Header 
             title="Reports"
             subtitle="Download and manage your generated GST Excel documents."
-            icon={<FileBarChart className="w-6 h-6 text-blue-600" />}
+            icon={<FileBarChart className="w-7 h-7 text-white" />}
           />
           <div className="p-6 space-y-6">
             <div className="h-8 bg-gray-200 rounded animate-pulse"></div>

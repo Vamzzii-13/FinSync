@@ -33,15 +33,15 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
       data-testid="dashboard-header"
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="p-3 bg-blue-100 rounded-full">
+        <div className="flex items-center space-x-4">
+          <div className="p-4 bg-blue-600 rounded-2xl">
             {icon}
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800" data-testid="header-title">
+            <h1 className="text-4xl font-bold text-gray-900" data-testid="header-title">
               {title}
             </h1>
-            <p className="text-gray-600 mt-1" data-testid="header-subtitle">
+            <p className="text-gray-600 mt-2 text-lg" data-testid="header-subtitle">
               {subtitle}
             </p>
           </div>

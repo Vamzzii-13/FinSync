@@ -41,7 +41,7 @@ export default function DashboardPage() {
         <Header 
           title="Dashboard Overview"
           subtitle="Welcome back! Here's what's happening with your GST compliance."
-          icon={<LayoutDashboard className="w-6 h-6 text-blue-600" />}
+          icon={<LayoutDashboard className="w-7 h-7 text-white" />}
         />
         
         <motion.div
