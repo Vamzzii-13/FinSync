@@ -190,19 +190,19 @@ export default function AuthPage() {
       
       {/* Right Side Login Panel */}
       <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-10">
-        <div className="w-[450px] bg-white/95 backdrop-blur-xl relative overflow-hidden shadow-2xl rounded-2xl border border-white/30">
-          {/* Glass Panel Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-blue-50/60 backdrop-blur-xl rounded-2xl"></div>
+        <div className="w-[450px] bg-black/20 backdrop-blur-sm relative overflow-hidden shadow-2xl rounded-2xl border border-cyan-400/30">
+          {/* Transparent Glass Panel Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-blue-900/20 to-cyan-900/15 backdrop-blur-sm rounded-2xl"></div>
           
-          {/* Subtle Light Effects */}
+          {/* Subtle Glow Effects */}
           <div className="absolute inset-0 overflow-hidden rounded-2xl">
             <motion.div 
-              className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-blue-400/15 to-violet-400/15 rounded-full blur-2xl"
+              className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-cyan-400/20 to-blue-400/15 rounded-full blur-2xl"
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             />
             <motion.div 
-              className="absolute -bottom-16 -left-16 w-32 h-32 bg-gradient-to-br from-violet-400/10 to-blue-400/10 rounded-full blur-2xl"
+              className="absolute -bottom-16 -left-16 w-32 h-32 bg-gradient-to-br from-blue-400/15 to-cyan-400/10 rounded-full blur-2xl"
               animate={{ rotate: -360 }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             />
@@ -223,7 +223,7 @@ export default function AuthPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-4"
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-violet-500 rounded-2xl mx-auto mb-3 flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl mx-auto mb-3 flex items-center justify-center shadow-lg border border-cyan-400/30">
               <Lock className="w-6 h-6 text-white" />
             </div>
           </motion.div>
@@ -232,7 +232,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-2xl font-bold text-gray-900 mb-2 tracking-tight"
+            className="text-2xl font-bold text-white mb-2 tracking-tight drop-shadow-lg"
           >
             {isLogin ? "Welcome Back" : "Join FinSync"}
           </motion.h1>
@@ -240,7 +240,7 @@ export default function AuthPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-gray-600 text-base font-light"
+            className="text-cyan-200 text-base font-light"
           >
             {isLogin 
               ? "Access your dashboard" 
@@ -254,18 +254,18 @@ export default function AuthPage() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="bg-white/50 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-white/20"
+          className="bg-black/10 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-cyan-400/20"
         >
           <Card className="border-0 shadow-none bg-transparent">
             <CardContent className="p-0">
 
             <Tabs value={isLogin ? "login" : "register"} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-4 bg-gradient-to-r from-blue-50 to-violet-50 p-1.5 rounded-2xl border border-white/30">
+              <TabsList className="grid w-full grid-cols-2 mb-4 bg-gradient-to-r from-black/20 to-blue-900/30 p-1.5 rounded-2xl border border-cyan-400/30">
                 <TabsTrigger 
                   value="login" 
                   onClick={() => setIsLogin(true)}
                   data-testid="login-tab"
-                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300"
+                  className="text-cyan-200 font-medium data-[state=active]:bg-cyan-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300 border data-[state=active]:border-cyan-400/50"
                 >
                   Sign In
                 </TabsTrigger>
@@ -273,7 +273,7 @@ export default function AuthPage() {
                   value="register" 
                   onClick={() => setIsLogin(false)}
                   data-testid="register-tab"
-                  className="text-gray-700 font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300"
+                  className="text-cyan-200 font-medium data-[state=active]:bg-cyan-500/20 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-3 transition-all duration-300 border data-[state=active]:border-cyan-400/50"
                 >
                   Sign Up
                 </TabsTrigger>
@@ -289,7 +289,7 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.7 }}
                     >
-                      <Label htmlFor="name" className="text-sm text-gray-700 aesthetic-body mb-2 block flex items-center justify-between">
+                      <Label htmlFor="name" className="text-sm text-cyan-200 aesthetic-body mb-2 block flex items-center justify-between">
                         Full Name
                         {formData.name && isFieldValid('name', formData.name) && (
                           <motion.div
@@ -315,11 +315,11 @@ export default function AuthPage() {
                           onChange={(e) => handleInputChange("name", e.target.value)}
                           onFocus={() => handleFieldFocus('name')}
                           onBlur={(e) => handleFieldBlur('name', e.target.value)}
-                          className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                          className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-black/20 backdrop-blur-sm border-2 text-white placeholder-cyan-300/70 ${
                             focusedField === 'name' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
                             formErrors.name ? 'border-red-400 ring-4 ring-red-400/10' :
                             isFieldValid('name', formData.name) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
-                            'border-gray-200 hover:border-gray-300'
+                            'border-cyan-400/30 hover:border-gray-300'
                           }`}
                           required={!isLogin}
                           data-testid="name-input"
@@ -354,7 +354,7 @@ export default function AuthPage() {
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.8 }}
                     >
-                      <Label htmlFor="company" className="text-sm text-gray-700 aesthetic-body mb-2 block flex items-center justify-between">
+                      <Label htmlFor="company" className="text-sm text-cyan-200 aesthetic-body mb-2 block flex items-center justify-between">
                         Company Name
                         {formData.company && isFieldValid('company', formData.company) && (
                           <motion.div
@@ -380,11 +380,11 @@ export default function AuthPage() {
                           onChange={(e) => handleInputChange("company", e.target.value)}
                           onFocus={() => handleFieldFocus('company')}
                           onBlur={(e) => handleFieldBlur('company', e.target.value)}
-                          className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                          className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-black/20 backdrop-blur-sm border-2 text-white placeholder-cyan-300/70 ${
                             focusedField === 'company' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
                             formErrors.company ? 'border-red-400 ring-4 ring-red-400/10' :
                             isFieldValid('company', formData.company) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
-                            'border-gray-200 hover:border-gray-300'
+                            'border-cyan-400/30 hover:border-gray-300'
                           }`}
                           required={!isLogin}
                           data-testid="company-input"
@@ -422,7 +422,7 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.7 : 0.9 }}
                 >
-                  <Label htmlFor="email" className="text-sm text-gray-700 aesthetic-body mb-2 block flex items-center justify-between">
+                  <Label htmlFor="email" className="text-sm text-cyan-200 aesthetic-body mb-2 block flex items-center justify-between">
                     Email Address
                     {formData.email && isFieldValid('email', formData.email) && (
                       <motion.div
@@ -448,11 +448,11 @@ export default function AuthPage() {
                       onChange={(e) => handleInputChange("email", e.target.value)}
                       onFocus={() => handleFieldFocus('email')}
                       onBlur={(e) => handleFieldBlur('email', e.target.value)}
-                      className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                      className={`pl-11 py-3 rounded-xl transition-all duration-300 font-medium bg-black/20 backdrop-blur-sm border-2 text-white placeholder-cyan-300/70 ${
                         focusedField === 'email' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
                         formErrors.email ? 'border-red-400 ring-4 ring-red-400/10' :
                         isFieldValid('email', formData.email) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
-                        'border-gray-200 hover:border-gray-300'
+                        'border-cyan-400/30 hover:border-gray-300'
                       }`}
                       required
                       data-testid="email-input"
@@ -488,7 +488,7 @@ export default function AuthPage() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: isLogin ? 0.8 : 1.0 }}
                 >
-                  <Label htmlFor="password" className="text-sm text-gray-700 aesthetic-body mb-2 block flex items-center justify-between">
+                  <Label htmlFor="password" className="text-sm text-cyan-200 aesthetic-body mb-2 block flex items-center justify-between">
                     Password
                     {formData.password && isFieldValid('password', formData.password) && (
                       <motion.div
@@ -514,11 +514,11 @@ export default function AuthPage() {
                       onChange={(e) => handleInputChange("password", e.target.value)}
                       onFocus={() => handleFieldFocus('password')}
                       onBlur={(e) => handleFieldBlur('password', e.target.value)}
-                      className={`pl-11 pr-20 py-3 rounded-xl transition-all duration-300 font-medium bg-white/70 backdrop-blur-sm border-2 ${
+                      className={`pl-11 pr-20 py-3 rounded-xl transition-all duration-300 font-medium bg-black/20 backdrop-blur-sm border-2 text-white placeholder-cyan-300/70 ${
                         focusedField === 'password' ? 'border-blue-400 ring-4 ring-blue-400/10 shadow-lg transform scale-[1.02]' :
                         formErrors.password ? 'border-red-400 ring-4 ring-red-400/10' :
                         isFieldValid('password', formData.password) ? 'border-emerald-400 ring-4 ring-emerald-400/10' :
-                        'border-gray-200 hover:border-gray-300'
+                        'border-cyan-400/30 hover:border-gray-300'
                       }`}
                       required
                       data-testid="password-input"
@@ -644,7 +644,7 @@ export default function AuthPage() {
 
         {/* Enhanced Security notice */}
         <motion.div 
-          className="mt-10 text-center text-xs text-gray-500 aesthetic-light"
+          className="mt-10 text-center text-xs text-cyan-300 aesthetic-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.3 }}
