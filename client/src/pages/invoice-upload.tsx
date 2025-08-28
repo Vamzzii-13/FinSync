@@ -104,7 +104,7 @@ export default function InvoiceUploadPage() {
                   <div>
                     <h4 className="font-medium text-gray-900">Government Upload</h4>
                     <p className="text-sm text-gray-600 mt-1">
-                      Upload Excel reports directly to GST government portal
+                      Access government portal from Reports section to upload Excel files
                     </p>
                   </div>
                 </div>

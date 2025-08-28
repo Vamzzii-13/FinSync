@@ -201,7 +201,7 @@ export default function ReportsPage() {
               </div>
               <div className="mt-6 flex justify-center">
                 <Button 
-                  onClick={() => setLocation('/govt-upload')}
+                  onClick={() => window.open('/govt-portal.html', '_blank')}
                   className="bg-blue-600 hover:bg-blue-700"
                 >
                   <Upload className="w-4 h-4 mr-2" />
@@ -271,7 +271,7 @@ export default function ReportsPage() {
                     <Button 
                       variant="outline" 
                       size="sm"
-                      onClick={() => setLocation('/govt-upload')}
+                      onClick={() => window.open('/govt-portal.html', '_blank')}
                       className="bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
                     >
                       <Upload className="w-4 h-4 mr-2" />
