@@ -99,6 +99,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             const resultMatch = output.match(/\[RESULT\]\s*({.*})/);
             if (resultMatch) {
               const result = JSON.parse(resultMatch[1]);
+              lastProcessingResult = result; // Store for download history
               res.json({
                 success: result.success,
                 message: result.message,
@@ -108,6 +109,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             } else {
               // Fallback: try to parse the entire output as JSON
               const result = JSON.parse(output.trim());
+              lastProcessingResult = result; // Store for download history
               res.json({
                 success: result.success,
                 message: result.message,
@@ -134,6 +136,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Store last processing result for download history
+  let lastProcessingResult: any = null;
+
   // Download Excel file endpoint
   app.get('/api/download-excel', async (req, res) => {
     const excelPath = path.join(process.cwd(), 'python_backend/output/Consolidated_Invoices_Output.xlsx');
@@ -144,12 +149,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Get file stats for size
         const stats = fs.statSync(excelPath);
         
+        // Get invoice count from last processing result
+        const invoicesCount = lastProcessingResult?.invoices_count?.toString() || '0';
+        
         // Create download history entry (using demo user for now)
         await storage.createDownloadHistory({
           userId: 'user-1', // Demo user ID
           filename: 'GST_Invoices_Extract.xlsx',
           fileType: 'excel',
-          invoicesCount: '1', // This could be dynamic based on actual count
+          invoicesCount: invoicesCount,
           fileSize: stats.size.toString(),
         });
 

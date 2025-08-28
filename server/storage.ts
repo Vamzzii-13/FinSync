@@ -37,6 +37,7 @@ export interface IStorage {
   // Download history operations
   getDownloadHistory(userId: string): Promise<DownloadHistory[]>;
   createDownloadHistory(download: InsertDownloadHistory & { userId: string }): Promise<DownloadHistory>;
+  deleteDownloadHistory(id: string): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
