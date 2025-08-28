@@ -22,17 +22,21 @@ import { useEffect, useState } from "react";
 
 function AppRouter() {
   const { user, isLoading } = useAuth();
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    // Only show intro if user has never seen it before
+    return !localStorage.getItem("finsync_intro_seen");
+  });
 
   const handleIntroComplete = () => {
     setShowIntro(false);
+    localStorage.setItem("finsync_intro_seen", "true");
   };
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
-  // Always show intro on app restart when not logged in
+  // Only show intro on first-time app load (not after logout)
   if (showIntro && !user) {
     return <IntroAnimation onComplete={handleIntroComplete} />;
   }

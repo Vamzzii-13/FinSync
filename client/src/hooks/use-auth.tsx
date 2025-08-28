@@ -92,7 +92,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("finsync_user");
-    localStorage.clear(); // Clear all localStorage data
+    // Keep intro_seen flag so intro doesn't show again
+    const introSeen = localStorage.getItem("finsync_intro_seen");
+    localStorage.clear();
+    if (introSeen) {
+      localStorage.setItem("finsync_intro_seen", "true");
+    }
     setLocation("/");
   };
 
