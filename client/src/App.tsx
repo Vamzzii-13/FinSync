@@ -12,6 +12,7 @@ import AnalyticsPage from "@/pages/analytics";
 import ReportsPage from "@/pages/reports";
 import InvoiceUploadPage from "@/pages/invoice-upload";
 import CompliancePage from "@/pages/compliance";
+import SettingsPage from "@/pages/settings";
 import LoadingScreen from "@/components/ui/loading-screen";
 import IntroAnimation from "@/components/intro/intro-animation";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
@@ -46,7 +47,7 @@ function AppRouter() {
         <Route path="/reports" component={user ? ReportsPage : AuthPage} />
         <Route path="/invoice-upload" component={user ? InvoiceUploadPage : AuthPage} />
         <Route path="/compliance" component={user ? CompliancePage : AuthPage} />
-        <Route path="/settings" component={user ? DashboardPage : AuthPage} />
+        <Route path="/settings" component={user ? SettingsPage : AuthPage} />
         <Route component={NotFound} />
       </Switch>
     </AnimatePresence>

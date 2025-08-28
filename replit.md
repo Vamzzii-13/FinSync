@@ -20,6 +20,8 @@ FinSync is a comprehensive GST (Goods and Services Tax) compliance and managemen
 - ✅ Professional enterprise styling throughout application
 - ✅ PostgreSQL database integration for user management
 - ✅ Session management with localStorage clearing on logout
+- ✅ Complete Settings page with subscription management and Premium plan (₹1000/month)
+- ✅ Fixed settings routing to dedicated page instead of redirecting to dashboard
 
 # User Preferences
 
