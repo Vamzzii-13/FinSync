@@ -17,13 +17,11 @@ import LoadingScreen from "@/components/ui/loading-screen";
 import IntroAnimation from "@/components/intro/intro-animation";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import { NotificationProvider } from "@/hooks/use-notification";
-import { NavigationProvider, useNavigation } from "@/hooks/use-navigation";
-import NavigationLoader from "@/components/ui/navigation-loader";
+
 import { useEffect, useState } from "react";
 
 function AppRouter() {
   const { user, isLoading } = useAuth();
-  const { isNavigating } = useNavigation();
   const [showIntro, setShowIntro] = useState(true);
 
   const handleIntroComplete = () => {
@@ -40,10 +38,8 @@ function AppRouter() {
   }
 
   return (
-    <>
-      {isNavigating && <NavigationLoader />}
-      <AnimatePresence mode="wait">
-        <Switch>
+    <AnimatePresence mode="wait">
+      <Switch>
           <Route path="/" component={user ? DashboardPage : AuthPage} />
           <Route path="/auth" component={AuthPage} />
           <Route path="/dashboard" component={user ? DashboardPage : AuthPage} />
@@ -55,8 +51,7 @@ function AppRouter() {
           <Route path="/settings" component={user ? SettingsPage : AuthPage} />
           <Route component={NotFound} />
         </Switch>
-      </AnimatePresence>
-    </>
+    </AnimatePresence>
   );
 }
 
@@ -64,8 +59,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <NavigationProvider>
-          <NotificationProvider>
+        <NotificationProvider>
             <TooltipProvider>
               <motion.div
                 initial={{ opacity: 0 }}
@@ -78,7 +72,6 @@ function App() {
               </motion.div>
             </TooltipProvider>
           </NotificationProvider>
-        </NavigationProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

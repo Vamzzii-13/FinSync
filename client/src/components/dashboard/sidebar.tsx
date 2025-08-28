@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/use-auth";
-import { useNavigation } from "@/hooks/use-navigation";
+
 import { LogoText } from "@/components/ui/logo";
 import {
   Gauge,
@@ -28,23 +28,15 @@ const navigation = [
 
 export default function Sidebar() {
   const { user } = useAuth();
-  const { setIsNavigating } = useNavigation();
+
   const [location, setLocation] = useLocation();
 
   const handleNavigation = async (path: string) => {
     if (location === path) return;
     
-    setIsNavigating(true);
-    
-    // Add small delay for smooth transition
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
+    // Small delay for smooth transition feel
+    await new Promise(resolve => setTimeout(resolve, 100));
     setLocation(path);
-    
-    // Keep loading state briefly for smooth UX
-    setTimeout(() => {
-      setIsNavigating(false);
-    }, 300);
   };
 
   const sidebarVariants = {
