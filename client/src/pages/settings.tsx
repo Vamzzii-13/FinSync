@@ -1,8 +1,22 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Settings, User, CreditCard, Bell, Moon, Sun, Check } from "lucide-react";
+import {
+  Settings,
+  User,
+  CreditCard,
+  Bell,
+  Moon,
+  Sun,
+  Check,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -28,9 +42,9 @@ export default function SettingsPage() {
       opacity: 1,
       transition: {
         duration: 0.6,
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -38,8 +52,8 @@ export default function SettingsPage() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   const handleSaveProfile = () => {
@@ -53,7 +67,8 @@ export default function SettingsPage() {
     setCurrentPlan("premium");
     toast({
       title: "Subscription Activated",
-      description: "Welcome to FinSync Premium! Your subscription is now active.",
+      description:
+        "Welcome to FinSync Premium! Your subscription is now active.",
     });
   };
 
@@ -66,14 +81,14 @@ export default function SettingsPage() {
       data-testid="settings-page"
     >
       <Sidebar />
-      
+
       <main className="flex-1 ml-64 min-h-screen">
-        <Header 
+        <Header
           title="Settings"
           subtitle="Manage your account preferences and subscription."
           icon={<Settings className="w-7 h-7 text-white" />}
         />
-        
+
         <motion.div
           variants={containerVariants}
           className="p-6 space-y-6"
@@ -81,26 +96,26 @@ export default function SettingsPage() {
         >
           <Tabs defaultValue="profile" className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
-              <TabsTrigger 
-                value="profile" 
+              <TabsTrigger
+                value="profile"
                 className="rounded-lg text-gray-700 font-medium data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 data-[state=active]:shadow-none hover:bg-gray-50 transition-all duration-200"
               >
                 Profile
               </TabsTrigger>
-              <TabsTrigger 
+              <TabsTrigger
                 value="subscription"
                 className="rounded-lg text-gray-700 font-medium data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 data-[state=active]:shadow-none hover:bg-gray-50 transition-all duration-200"
               >
                 Subscription
               </TabsTrigger>
-              <TabsTrigger 
+              <TabsTrigger
                 value="notifications"
                 className="rounded-lg text-gray-700 font-medium data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 data-[state=active]:shadow-none hover:bg-gray-50 transition-all duration-200"
               >
                 Notifications
               </TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="profile" className="space-y-6">
               <motion.div variants={itemVariants}>
                 <Card className="professional-card">
@@ -126,17 +141,27 @@ export default function SettingsPage() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email Address</Label>
-                      <Input id="email" type="email" defaultValue={user?.email || "john.doe@example.com"} />
+                      <Input
+                        id="email"
+                        type="email"
+                        defaultValue={user?.email || "john.doe@example.com"}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="company">Company</Label>
-                      <Input id="company" defaultValue={user?.company || "Tech Corp"} />
+                      <Input
+                        id="company"
+                        defaultValue={user?.company || "Tech Corp"}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
                       <Input id="phone" defaultValue="+91 9876543210" />
                     </div>
-                    <Button onClick={handleSaveProfile} className="w-full md:w-auto">
+                    <Button
+                      onClick={handleSaveProfile}
+                      className="w-full md:w-auto"
+                    >
                       Save Changes
                     </Button>
                   </CardContent>
@@ -157,13 +182,14 @@ export default function SettingsPage() {
                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                       <div>
                         <h3 className="font-semibold text-lg">
-                          {currentPlan === "premium" ? "Premium Plan" : "Free Plan"}
+                          {currentPlan === "premium"
+                            ? "Premium Plan"
+                            : "Free Plan"}
                         </h3>
                         <p className="text-gray-600">
-                          {currentPlan === "premium" 
-                            ? "Full access to all FinSync features" 
-                            : "Basic GST compliance features"
-                          }
+                          {currentPlan === "premium"
+                            ? "Full access to all FinSync features"
+                            : "Basic GST compliance features"}
                         </p>
                       </div>
                       {currentPlan === "premium" && (
@@ -181,25 +207,35 @@ export default function SettingsPage() {
                   <Card className="professional-card border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-cyan-50">
                     <CardHeader>
                       <CardTitle className="flex items-center justify-between">
-                        <span className="text-2xl font-bold text-blue-900">Premium Plan</span>
-                        <Badge variant="secondary" className="bg-blue-100 text-blue-800">
+                        <span className="text-2xl font-bold text-blue-900">
+                          Premium Plan
+                        </span>
+                        <Badge
+                          variant="secondary"
+                          className="bg-blue-100 text-blue-800"
+                        >
                           Recommended
                         </Badge>
                       </CardTitle>
                       <CardDescription className="text-blue-700">
-                        Unlock advanced GST analytics, unlimited file uploads, and priority support.
+                        Unlock advanced GST analytics, unlimited file uploads,
+                        and priority support.
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-900">₹1,000</div>
+                        <div className="text-4xl font-bold text-blue-900">
+                          ₹1,000
+                        </div>
                         <div className="text-gray-600">per month</div>
                       </div>
 
                       <Separator />
 
                       <div className="space-y-3">
-                        <h4 className="font-semibold text-gray-900">Premium Features:</h4>
+                        <h4 className="font-semibold text-gray-900">
+                          Premium Features:
+                        </h4>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           {[
                             "Unlimited invoice processing",
@@ -209,17 +245,22 @@ export default function SettingsPage() {
                             "API access for integrations",
                             "Multi-user collaboration",
                             "Advanced compliance alerts",
-                            "Export to multiple formats"
+                            "Export to multiple formats",
                           ].map((feature, index) => (
-                            <div key={index} className="flex items-center space-x-2">
+                            <div
+                              key={index}
+                              className="flex items-center space-x-2"
+                            >
                               <Check className="w-4 h-4 text-green-600" />
-                              <span className="text-sm text-gray-700">{feature}</span>
+                              <span className="text-sm text-gray-700">
+                                {feature}
+                              </span>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      <Button 
+                      <Button
                         onClick={handleUpgradeToPremium}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-semibold"
                         size="lg"
@@ -228,7 +269,8 @@ export default function SettingsPage() {
                       </Button>
 
                       <p className="text-xs text-gray-500 text-center">
-                        Cancel anytime. No hidden fees. 30-day money-back guarantee.
+                        Cancel anytime. No hidden fees. 30-day money-back
+                        guarantee.
                       </p>
                     </CardContent>
                   </Card>
@@ -247,11 +289,15 @@ export default function SettingsPage() {
                     <CardContent className="space-y-4">
                       <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
                         <div>
-                          <h3 className="font-semibold text-green-800">Next Billing Date</h3>
+                          <h3 className="font-semibold text-green-800">
+                            Next Billing Date
+                          </h3>
                           <p className="text-green-600">February 26, 2025</p>
                         </div>
                         <div className="text-right">
-                          <h3 className="font-semibold text-green-800">Amount</h3>
+                          <h3 className="font-semibold text-green-800">
+                            Amount
+                          </h3>
                           <p className="text-green-600">₹1,000</p>
                         </div>
                       </div>
@@ -285,7 +331,10 @@ export default function SettingsPage() {
                           Receive notifications in your browser
                         </p>
                       </div>
-                      <Switch checked={notifications} onCheckedChange={setNotifications} />
+                      <Switch
+                        checked={notifications}
+                        onCheckedChange={setNotifications}
+                      />
                     </div>
                     <Separator />
                     <div className="flex items-center justify-between">
@@ -295,7 +344,10 @@ export default function SettingsPage() {
                           Receive updates via email
                         </p>
                       </div>
-                      <Switch checked={emailNotifications} onCheckedChange={setEmailNotifications} />
+                      <Switch
+                        checked={emailNotifications}
+                        onCheckedChange={setEmailNotifications}
+                      />
                     </div>
                     <Separator />
                     <div className="flex items-center justify-between">
@@ -305,14 +357,15 @@ export default function SettingsPage() {
                           Switch to dark theme
                         </p>
                       </div>
-                      <Switch checked={darkMode} onCheckedChange={setDarkMode} />
+                      <Switch
+                        checked={darkMode}
+                        onCheckedChange={setDarkMode}
+                      />
                     </div>
                   </CardContent>
                 </Card>
               </motion.div>
             </TabsContent>
-
-
           </Tabs>
         </motion.div>
       </main>

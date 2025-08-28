@@ -20,14 +20,15 @@ import { NotificationProvider } from "@/hooks/use-notification";
 import { useEffect, useState } from "react";
 
 function AppRouter() {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, isTransitioning } = useAuth();
   const [showIntro, setShowIntro] = useState(true);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
   };
 
-  if (isLoading) {
+  // Show loading screen during initial load or transitions
+  if (isLoading || isTransitioning) {
     return <LoadingScreen />;
   }
 

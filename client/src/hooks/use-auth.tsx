@@ -12,6 +12,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
+  isTransitioning: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (userData: any) => Promise<void>;
   logout: () => void;
@@ -22,6 +23,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [, setLocation] = useLocation();
 
   useEffect(() => {
@@ -47,11 +49,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
+    setIsTransitioning(true);
     setIsLoading(true);
+    
     try {
-      // Extended loading time for better loading screen experience
-      const loadingTime = 3500 + Math.random() * 1500; // 3.5-5 seconds
-      await new Promise(resolve => setTimeout(resolve, loadingTime));
+      // Simulate login process with consistent 3-second loading
+      await new Promise(resolve => setTimeout(resolve, 3000));
       
       const userData: User = {
         id: "1",
@@ -63,20 +66,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       setUser(userData);
       localStorage.setItem("finsync_user", JSON.stringify(userData));
+      
+      // Navigate after setting user data but keep loading for smooth transition
       setLocation("/dashboard");
+      
+      // Keep loading screen for additional 1 second for smooth transition
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
     } catch (error) {
       throw new Error("Login failed");
     } finally {
       setIsLoading(false);
+      setIsTransitioning(false);
     }
   };
 
   const register = async (userData: any) => {
+    setIsTransitioning(true);
     setIsLoading(true);
+    
     try {
-      // Extended loading time for registration
-      const loadingTime = 4000 + Math.random() * 1000; // 4-5 seconds
-      await new Promise(resolve => setTimeout(resolve, loadingTime));
+      // Simulate registration process with consistent 3-second loading
+      await new Promise(resolve => setTimeout(resolve, 3000));
       
       const newUser: User = {
         id: Date.now().toString(),
@@ -89,10 +100,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(newUser);
       localStorage.setItem("finsync_user", JSON.stringify(newUser));
       setLocation("/dashboard");
+      
+      // Keep loading screen for additional 1 second for smooth transition
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
     } catch (error) {
       throw new Error("Registration failed");
     } finally {
       setIsLoading(false);
+      setIsTransitioning(false);
     }
   };
 
@@ -104,7 +120,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, isTransitioning, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
