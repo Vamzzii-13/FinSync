@@ -80,22 +80,22 @@ export default function SettingsPage() {
           data-testid="settings-content"
         >
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-xl">
+            <TabsList className="grid w-full grid-cols-3 bg-white p-1 rounded-xl border border-gray-200 shadow-sm">
               <TabsTrigger 
                 value="profile" 
-                className="rounded-lg text-gray-600 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200"
+                className="rounded-lg text-gray-700 font-medium data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 data-[state=active]:shadow-none hover:bg-gray-50 transition-all duration-200"
               >
                 Profile
               </TabsTrigger>
               <TabsTrigger 
                 value="subscription"
-                className="rounded-lg text-gray-600 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200"
+                className="rounded-lg text-gray-700 font-medium data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 data-[state=active]:shadow-none hover:bg-gray-50 transition-all duration-200"
               >
                 Subscription
               </TabsTrigger>
               <TabsTrigger 
                 value="notifications"
-                className="rounded-lg text-gray-600 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200"
+                className="rounded-lg text-gray-700 font-medium data-[state=active]:bg-blue-100 data-[state=active]:text-blue-700 data-[state=active]:shadow-none hover:bg-gray-50 transition-all duration-200"
               >
                 Notifications
               </TabsTrigger>
