@@ -127,22 +127,22 @@ export default function SettingsPage() {
           data-testid="settings-content"
         >
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-gray-800/50 p-1 rounded-xl border border-gray-700/50 shadow-sm backdrop-blur-sm">
+            <TabsList className="grid w-full grid-cols-3 bg-card p-1 rounded-xl border border-border shadow-sm backdrop-blur-sm">
               <TabsTrigger
                 value="profile"
-                className="rounded-lg text-gray-300 font-medium data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400 data-[state=active]:shadow-none hover:bg-gray-700/50 transition-all duration-200"
+                className="rounded-lg text-muted-foreground font-medium data-[state=active]:bg-primary/20 data-[state=active]:text-primary data-[state=active]:shadow-none hover:bg-accent transition-all duration-200"
               >
                 Profile
               </TabsTrigger>
               <TabsTrigger
                 value="subscription"
-                className="rounded-lg text-gray-300 font-medium data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400 data-[state=active]:shadow-none hover:bg-gray-700/50 transition-all duration-200"
+                className="rounded-lg text-muted-foreground font-medium data-[state=active]:bg-primary/20 data-[state=active]:text-primary data-[state=active]:shadow-none hover:bg-accent transition-all duration-200"
               >
                 Subscription
               </TabsTrigger>
               <TabsTrigger
                 value="notifications"
-                className="rounded-lg text-gray-300 font-medium data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400 data-[state=active]:shadow-none hover:bg-gray-700/50 transition-all duration-200"
+                className="rounded-lg text-muted-foreground font-medium data-[state=active]:bg-primary/20 data-[state=active]:text-primary data-[state=active]:shadow-none hover:bg-accent transition-all duration-200"
               >
                 Notifications
               </TabsTrigger>
