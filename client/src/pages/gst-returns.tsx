@@ -19,18 +19,16 @@ export default function GstReturnsPage() {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
+        duration: 0.3
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { opacity: 0 },
     visible: {
-      y: 0,
       opacity: 1,
-      transition: { duration: 0.5 }
+      transition: { duration: 0.2 }
     }
   };
 
@@ -58,24 +56,13 @@ export default function GstReturnsPage() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="space-y-6">
-        <div className="h-8 bg-gray-200 rounded animate-pulse"></div>
-        <div className="grid gap-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-32 bg-gray-100 rounded-lg animate-pulse"></div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  // Remove blocking loading state for smoother navigation
 
   return (
     <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
       className="min-h-screen flex bg-gray-50/50"
       data-testid="gst-returns-page"
     >
@@ -88,13 +75,9 @@ export default function GstReturnsPage() {
           icon={<FileText className="w-7 h-7 text-white" />}
         />
         
-        <motion.div
-          variants={containerVariants}
-          className="p-6 space-y-6"
-          data-testid="gst-returns-content"
-        >
+        <div className="p-6 space-y-6" data-testid="gst-returns-content">
       {/* Header */}
-      <motion.div variants={itemVariants} className="flex justify-between items-center">
+      <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             GST Returns
@@ -110,10 +93,10 @@ export default function GstReturnsPage() {
           <Plus className="w-4 h-4" />
           New Return
         </Button>
-      </motion.div>
+      </div>
 
       {/* Statistics Cards */}
-      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="professional-card">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -169,10 +152,10 @@ export default function GstReturnsPage() {
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
 
       {/* Returns List */}
-      <motion.div variants={itemVariants} className="space-y-4">
+      <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
           Recent Returns
         </h2>
@@ -249,8 +232,8 @@ export default function GstReturnsPage() {
             ))}
           </div>
         )}
-      </motion.div>
-        </motion.div>
+      </div>
+        </div>
       </main>
     </motion.div>
   );
