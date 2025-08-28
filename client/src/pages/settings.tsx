@@ -27,14 +27,28 @@ import Sidebar from "@/components/dashboard/sidebar";
 import Header from "@/components/dashboard/header";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
+import { useEffect } from "react";
 
 export default function SettingsPage() {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check if dark mode is already enabled
+    return localStorage.getItem("finsync_dark_mode") === "true" || 
+           document.documentElement.classList.contains("dark");
+  });
   const [notifications, setNotifications] = useState(true);
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [currentPlan, setCurrentPlan] = useState("free");
+
+  // Apply dark mode on component mount
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -69,6 +83,24 @@ export default function SettingsPage() {
       title: "Subscription Activated",
       description:
         "Welcome to FinSync Premium! Your subscription is now active.",
+    });
+  };
+
+  const handleDarkModeToggle = (enabled: boolean) => {
+    setDarkMode(enabled);
+    
+    // Update document class and localStorage
+    if (enabled) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("finsync_dark_mode", "true");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("finsync_dark_mode", "false");
+    }
+    
+    toast({
+      title: `Dark Mode ${enabled ? "Enabled" : "Disabled"}`,
+      description: `Your theme preference has been ${enabled ? "switched to dark mode" : "switched to light mode"}.`,
     });
   };
 
@@ -359,7 +391,7 @@ export default function SettingsPage() {
                       </div>
                       <Switch
                         checked={darkMode}
-                        onCheckedChange={setDarkMode}
+                        onCheckedChange={handleDarkModeToggle}
                       />
                     </div>
                   </CardContent>
