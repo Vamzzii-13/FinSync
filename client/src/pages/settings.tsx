@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Settings, User, CreditCard, Shield, Bell, Moon, Sun, Check } from "lucide-react";
+import { Settings, User, CreditCard, Bell, Moon, Sun, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -80,11 +80,25 @@ export default function SettingsPage() {
           data-testid="settings-content"
         >
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="profile">Profile</TabsTrigger>
-              <TabsTrigger value="subscription">Subscription</TabsTrigger>
-              <TabsTrigger value="notifications">Notifications</TabsTrigger>
-              <TabsTrigger value="security">Security</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-xl">
+              <TabsTrigger 
+                value="profile" 
+                className="rounded-lg text-gray-600 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200"
+              >
+                Profile
+              </TabsTrigger>
+              <TabsTrigger 
+                value="subscription"
+                className="rounded-lg text-gray-600 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200"
+              >
+                Subscription
+              </TabsTrigger>
+              <TabsTrigger 
+                value="notifications"
+                className="rounded-lg text-gray-600 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all duration-200"
+              >
+                Notifications
+              </TabsTrigger>
             </TabsList>
             
             <TabsContent value="profile" className="space-y-6">
@@ -298,46 +312,7 @@ export default function SettingsPage() {
               </motion.div>
             </TabsContent>
 
-            <TabsContent value="security" className="space-y-6">
-              <motion.div variants={itemVariants}>
-                <Card className="professional-card">
-                  <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
-                      <Shield className="w-5 h-5" />
-                      <span>Security Settings</span>
-                    </CardTitle>
-                    <CardDescription>
-                      Manage your account security and privacy.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="currentPassword">Current Password</Label>
-                      <Input id="currentPassword" type="password" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="newPassword">New Password</Label>
-                      <Input id="newPassword" type="password" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                      <Input id="confirmPassword" type="password" />
-                    </div>
-                    <Button>Update Password</Button>
-                    
-                    <Separator className="my-6" />
-                    
-                    <div className="space-y-4">
-                      <h4 className="font-semibold">Two-Factor Authentication</h4>
-                      <p className="text-sm text-gray-600">
-                        Add an extra layer of security to your account
-                      </p>
-                      <Button variant="outline">Enable 2FA</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </TabsContent>
+
           </Tabs>
         </motion.div>
       </main>
