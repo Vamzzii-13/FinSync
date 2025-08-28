@@ -17,10 +17,13 @@ import LoadingScreen from "@/components/ui/loading-screen";
 import IntroAnimation from "@/components/intro/intro-animation";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import { NotificationProvider } from "@/hooks/use-notification";
+import { NavigationProvider, useNavigation } from "@/hooks/use-navigation";
+import NavigationLoader from "@/components/ui/navigation-loader";
 import { useEffect, useState } from "react";
 
 function AppRouter() {
   const { user, isLoading } = useAuth();
+  const { isNavigating } = useNavigation();
   const [showIntro, setShowIntro] = useState(true);
 
   const handleIntroComplete = () => {
@@ -37,41 +40,45 @@ function AppRouter() {
   }
 
   return (
-    <AnimatePresence mode="wait">
-      <Switch>
-        <Route path="/" component={user ? DashboardPage : AuthPage} />
-        <Route path="/auth" component={AuthPage} />
-        <Route path="/dashboard" component={user ? DashboardPage : AuthPage} />
-        <Route path="/gst-returns" component={user ? GstReturnsPage : AuthPage} />
-        <Route path="/analytics" component={user ? AnalyticsPage : AuthPage} />
-        <Route path="/reports" component={user ? ReportsPage : AuthPage} />
-        <Route path="/invoice-upload" component={user ? InvoiceUploadPage : AuthPage} />
-        <Route path="/compliance" component={user ? CompliancePage : AuthPage} />
-        <Route path="/settings" component={user ? SettingsPage : AuthPage} />
-        <Route component={NotFound} />
-      </Switch>
-    </AnimatePresence>
+    <>
+      {isNavigating && <NavigationLoader />}
+      <AnimatePresence mode="wait">
+        <Switch>
+          <Route path="/" component={user ? DashboardPage : AuthPage} />
+          <Route path="/auth" component={AuthPage} />
+          <Route path="/dashboard" component={user ? DashboardPage : AuthPage} />
+          <Route path="/gst-returns" component={user ? GstReturnsPage : AuthPage} />
+          <Route path="/analytics" component={user ? AnalyticsPage : AuthPage} />
+          <Route path="/reports" component={user ? ReportsPage : AuthPage} />
+          <Route path="/invoice-upload" component={user ? InvoiceUploadPage : AuthPage} />
+          <Route path="/compliance" component={user ? CompliancePage : AuthPage} />
+          <Route path="/settings" component={user ? SettingsPage : AuthPage} />
+          <Route component={NotFound} />
+        </Switch>
+      </AnimatePresence>
+    </>
   );
 }
 
 function App() {
-
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <NotificationProvider>
-          <TooltipProvider>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="min-h-screen font-inter"
-            >
-              <AppRouter />
-              <Toaster />
-            </motion.div>
-          </TooltipProvider>
-        </NotificationProvider>
+        <NavigationProvider>
+          <NotificationProvider>
+            <TooltipProvider>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="min-h-screen font-inter"
+              >
+                <AppRouter />
+                <Toaster />
+              </motion.div>
+            </TooltipProvider>
+          </NotificationProvider>
+        </NavigationProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
