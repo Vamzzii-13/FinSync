@@ -60,7 +60,7 @@ export default function InvoiceUploadPage() {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 How to Use Invoice Upload
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="flex items-start space-x-3">
                   <div className="bg-blue-100 rounded-full p-2 flex-shrink-0">
                     <span className="text-blue-600 font-bold text-sm">1</span>
@@ -93,6 +93,18 @@ export default function InvoiceUploadPage() {
                     <h4 className="font-medium text-gray-900">Excel Generation</h4>
                     <p className="text-sm text-gray-600 mt-1">
                       Generated Excel files are saved to Reports section
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <div className="bg-orange-100 rounded-full p-2 flex-shrink-0">
+                    <span className="text-orange-600 font-bold text-sm">4</span>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900">Government Upload</h4>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Upload Excel reports directly to GST government portal
                     </p>
                   </div>
                 </div>

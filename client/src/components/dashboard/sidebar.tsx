@@ -12,7 +12,8 @@ import {
   FileSpreadsheet,
   Shield,
   Settings,
-  User
+  User,
+  Upload
 } from "lucide-react";
 import { useLocation } from "wouter";
 
@@ -22,6 +23,7 @@ const navigation = [
   { name: "Analytics", icon: BarChart3, path: "/analytics" },
   { name: "Invoice Upload", icon: Receipt, path: "/invoice-upload" },
   { name: "Reports", icon: FileSpreadsheet, path: "/reports" },
+  { name: "Government Upload", icon: Upload, path: "/govt-upload" },
   { name: "Compliance", icon: Shield, path: "/compliance" },
   { name: "Settings", icon: Settings, path: "/settings" },
 ];

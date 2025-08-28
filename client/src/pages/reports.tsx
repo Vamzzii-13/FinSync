@@ -3,16 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, FileSpreadsheet, Calendar, Package, Trash2, FileBarChart } from "lucide-react";
+import { Download, FileSpreadsheet, Calendar, Package, Trash2, FileBarChart, Upload } from "lucide-react";
 import { format } from "date-fns";
 import type { DownloadHistory } from "@shared/schema";
 import Sidebar from "@/components/dashboard/sidebar";
 import Header from "@/components/dashboard/header";
+import { useLocation } from "wouter";
 
 export default function ReportsPage() {
   const { data: reports = [], isLoading } = useQuery<DownloadHistory[]>({
     queryKey: ["/api/download-history"],
   });
+  const [, setLocation] = useLocation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -197,6 +199,15 @@ export default function ReportsPage() {
                   <strong>Next Steps:</strong> Go to Invoice Upload → Upload files → Excel documents will be generated and saved here
                 </p>
               </div>
+              <div className="mt-6 flex justify-center">
+                <Button 
+                  onClick={() => setLocation('/govt-upload')}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  <Upload className="w-4 h-4 mr-2" />
+                  Upload to Government Portal
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ) : (
@@ -256,6 +267,15 @@ export default function ReportsPage() {
                     >
                       <Download className="w-4 h-4 mr-2" />
                       Download
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => setLocation('/govt-upload')}
+                      className="bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload to Govt
                     </Button>
                     <Button 
                       variant="outline" 
