@@ -20,15 +20,14 @@ import { NotificationProvider } from "@/hooks/use-notification";
 import { useEffect, useState } from "react";
 
 function AppRouter() {
-  const { user, isLoading, isTransitioning } = useAuth();
+  const { user, isLoading } = useAuth();
   const [showIntro, setShowIntro] = useState(true);
 
   const handleIntroComplete = () => {
     setShowIntro(false);
   };
 
-  // Show loading screen during initial load or transitions
-  if (isLoading || isTransitioning) {
+  if (isLoading) {
     return <LoadingScreen />;
   }
 
@@ -56,20 +55,6 @@ function AppRouter() {
 }
 
 function App() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    // Add minimum mount time for consistent loading experience
-    const mountTimer = setTimeout(() => {
-      setMounted(true);
-    }, 1000); // 1 second initial delay
-
-    return () => clearTimeout(mountTimer);
-  }, []);
-
-  if (!mounted) {
-    return <LoadingScreen />;
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
