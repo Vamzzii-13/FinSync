@@ -24,6 +24,8 @@ FinSync is a comprehensive GST (Goods and Services Tax) compliance and managemen
 - ✅ Fixed settings routing to dedicated page instead of redirecting to dashboard
 - ✅ Enhanced Excel report formatting for professional auditor use with proper column sizing and structured layout
 - ✅ Removed dark mode functionality completely per user request
+- ✅ Implemented GST-compliant Excel format with multiple worksheets (B2B Invoices, HSN Summary, Document Issued)
+- ✅ Added all mandatory GST fields including GSTIN, Place of Supply, Reverse Charge, Tax breakdowns
 
 # User Preferences
 
