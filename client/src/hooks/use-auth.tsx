@@ -90,13 +90,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
+    setIsLoading(true);
     setUser(null);
     localStorage.removeItem("finsync_user");
     // Set flag to show intro animation on next load
     localStorage.setItem("finsync_show_intro_on_logout", "true");
-    setLocation("/auth");
-    // Reload the page to trigger intro animation
-    window.location.reload();
+    
+    // Smooth transition with loading state
+    setTimeout(() => {
+      window.location.reload();
+    }, 800); // Give time for loading animation to show
   };
 
   return (

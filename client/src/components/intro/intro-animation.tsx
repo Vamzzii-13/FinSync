@@ -10,6 +10,7 @@ interface IntroAnimationProps {
 export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
   const [currentScene, setCurrentScene] = useState(0);
   const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, delay: number}>>([]);
+  const [isExiting, setIsExiting] = useState(false);
 
   // Generate digital particles
   useEffect(() => {
@@ -40,9 +41,11 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
           runScene(sceneIndex + 1);
         }, timeline[sceneIndex].duration);
       } else {
+        // Start exit animation
+        setIsExiting(true);
         setTimeout(() => {
           onComplete();
-        }, 500);
+        }, 800);
       }
     };
 
@@ -57,9 +60,9 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
     <motion.div
       className="fixed inset-0 bg-gradient-to-br from-gray-900 via-blue-950 to-cyan-900 flex items-center justify-center overflow-hidden"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ opacity: isExiting ? 0 : 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: isExiting ? 0.8 : 0.5 }}
       data-testid="intro-animation"
     >
       {/* Animated Network Grid Background */}

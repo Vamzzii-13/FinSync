@@ -29,11 +29,16 @@ function AppRouter() {
     const shouldShowOnLogout = localStorage.getItem("finsync_show_intro_on_logout");
     return !hasSeenIntro || shouldShowOnLogout === "true";
   });
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleIntroComplete = () => {
-    setShowIntro(false);
-    localStorage.setItem("finsync_intro_seen", "true");
-    localStorage.removeItem("finsync_show_intro_on_logout");
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setShowIntro(false);
+      localStorage.setItem("finsync_intro_seen", "true");
+      localStorage.removeItem("finsync_show_intro_on_logout");
+      setIsTransitioning(false);
+    }, 300);
   };
 
   // Show intro animation first, regardless of auth state
@@ -41,7 +46,8 @@ function AppRouter() {
     return <IntroAnimation onComplete={handleIntroComplete} />;
   }
 
-  if (isLoading) {
+  // Show smooth transition loading after intro
+  if (isTransitioning || isLoading) {
     return <LoadingScreen />;
   }
 
