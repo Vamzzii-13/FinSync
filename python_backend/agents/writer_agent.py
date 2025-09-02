@@ -46,6 +46,7 @@ def writer_agent(data: list, file_path: str):
         
         # Handle multi-line shop name properly
         shop_name = record.get("Shop Name", "N/A")
+        hsn_line_count = 1  # Default for HSN codes
         if isinstance(shop_name, str):
             # Keep line breaks but clean them up
             shop_name = shop_name.replace('\\n', '\n').strip()
@@ -53,6 +54,25 @@ def writer_agent(data: list, file_path: str):
             line_count = shop_name.count('\n') + 1
         else:
             line_count = 1
+            
+        # Pre-calculate HSN codes for row height calculation
+        items = record.get("Items", [])
+        if items and isinstance(items, list):
+            hsn_codes = []
+            for item in items:
+                if isinstance(item, dict) and "HSN Code" in item:
+                    hsn_code = str(item["HSN Code"]).strip()
+                    if hsn_code and hsn_code != "0" and hsn_code != "null":
+                        hsn_codes.append(hsn_code)
+            
+            if hsn_codes:
+                unique_codes = list(dict.fromkeys(hsn_codes))
+                if len(unique_codes) <= 2:
+                    hsn_line_count = 1
+                elif len(unique_codes) <= 6:
+                    hsn_line_count = (len(unique_codes) + 1) // 2  # Groups of 2
+                else:
+                    hsn_line_count = (len(unique_codes) + 2) // 3  # Groups of 3
         
         # Vendor/Shop Name with text wrapping (Column B)
         cell = ws.cell(row=row_idx, column=2)
@@ -93,16 +113,30 @@ def writer_agent(data: list, file_path: str):
             for item in items:
                 if isinstance(item, dict) and "HSN Code" in item:
                     hsn_code = str(item["HSN Code"]).strip()
-                    if hsn_code and hsn_code != "0":
+                    if hsn_code and hsn_code != "0" and hsn_code != "null":
                         hsn_codes.append(hsn_code)
             
             if hsn_codes:
-                # Format as comma-separated, wrapping every 3 codes to new line
-                formatted_codes = []
-                for i in range(0, len(hsn_codes), 3):
-                    chunk = hsn_codes[i:i+3]
-                    formatted_codes.append(", ".join(chunk))
-                cell.value = "\n".join(formatted_codes)
+                # Remove duplicates while preserving order
+                unique_codes = list(dict.fromkeys(hsn_codes))
+                
+                # Format for better readability - max 2 codes per line
+                if len(unique_codes) <= 2:
+                    cell.value = ", ".join(unique_codes)
+                elif len(unique_codes) <= 6:
+                    # Split into groups of 2 for medium lists
+                    formatted_codes = []
+                    for i in range(0, len(unique_codes), 2):
+                        chunk = unique_codes[i:i+2]
+                        formatted_codes.append(", ".join(chunk))
+                    cell.value = "\n".join(formatted_codes)
+                else:
+                    # For large lists, group by 3 per line
+                    formatted_codes = []
+                    for i in range(0, len(unique_codes), 3):
+                        chunk = unique_codes[i:i+3]
+                        formatted_codes.append(", ".join(chunk))
+                    cell.value = "\n".join(formatted_codes)
             else:
                 cell.value = "N/A"
         else:
@@ -135,8 +169,9 @@ def writer_agent(data: list, file_path: str):
         cell.value = taxable_value
         cell.alignment = Alignment(vertical='center', horizontal='center')
         
-        # Set row height based on content (minimum 25, add 15 for each extra line)
-        dynamic_height = max(25, 15 + (line_count * 15))
+        # Set row height based on content (consider both shop name and HSN codes)
+        max_lines = max(line_count, hsn_line_count)
+        dynamic_height = max(25, 15 + (max_lines * 15))
         ws.row_dimensions[row_idx].height = dynamic_height
 
     # Set header row height
