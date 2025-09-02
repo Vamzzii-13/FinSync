@@ -31,10 +31,11 @@ def writer_agent(data: list, file_path: str):
     for col_letter, width in column_widths.items():
         ws.column_dimensions[col_letter].width = width
 
-    # Create simple headers
+    # Create simple headers with center alignment
     for col, header in enumerate(headers, start=1):
         cell = ws.cell(row=1, column=col)
         cell.value = header
+        cell.alignment = Alignment(vertical='center', horizontal='center')
 
     # Process data rows
     for row_idx, record in enumerate(data, start=2):
@@ -56,7 +57,7 @@ def writer_agent(data: list, file_path: str):
         # Vendor/Shop Name with text wrapping (Column B)
         cell = ws.cell(row=row_idx, column=2)
         cell.value = shop_name
-        cell.alignment = Alignment(wrap_text=True, vertical='top', horizontal='left')
+        cell.alignment = Alignment(wrap_text=True, vertical='center', horizontal='center')
         
         # Date (Column C)
         cell = ws.cell(row=row_idx, column=3)
@@ -64,7 +65,7 @@ def writer_agent(data: list, file_path: str):
         if date_value in (None, "", "null", 0, 0.0):
             date_value = "N/A"
         cell.value = date_value
-        cell.alignment = Alignment(vertical='center')
+        cell.alignment = Alignment(vertical='center', horizontal='center')
         
         # GSTIN (Column D)
         cell = ws.cell(row=row_idx, column=4)
@@ -72,7 +73,7 @@ def writer_agent(data: list, file_path: str):
         if gstin_value in (None, "", "null", 0, 0.0):
             gstin_value = "N/A"
         cell.value = gstin_value
-        cell.alignment = Alignment(vertical='center')
+        cell.alignment = Alignment(vertical='center', horizontal='center')
         
         # Invoice No. (Column E)
         cell = ws.cell(row=row_idx, column=5)
@@ -80,7 +81,7 @@ def writer_agent(data: list, file_path: str):
         if invoice_value in (None, "", "null", 0, 0.0):
             invoice_value = "N/A"
         cell.value = invoice_value
-        cell.alignment = Alignment(vertical='center')
+        cell.alignment = Alignment(vertical='center', horizontal='center')
         
         # HSN Codes (Column F) - get from Items array
         items = record.get("Items", [])
@@ -109,7 +110,7 @@ def writer_agent(data: list, file_path: str):
             hsn_codes = record.get("HSN Code", "N/A")
             cell.value = hsn_codes if hsn_codes else "N/A"
             
-        cell.alignment = Alignment(wrap_text=True, vertical='top', horizontal='left')
+        cell.alignment = Alignment(wrap_text=True, vertical='center', horizontal='center')
         
         # Tax columns: CGST, SGST, IGST, Total Tax (Columns G, H, I, J)
         tax_data = [
@@ -124,7 +125,7 @@ def writer_agent(data: list, file_path: str):
             if value in (None, "", "null", 0, 0.0):
                 value = "N/A"
             cell.value = value
-            cell.alignment = Alignment(vertical='center')
+            cell.alignment = Alignment(vertical='center', horizontal='center')
         
         # Taxable Amount (Column K)
         cell = ws.cell(row=row_idx, column=11)
@@ -132,7 +133,7 @@ def writer_agent(data: list, file_path: str):
         if taxable_value in (None, "", "null", 0, 0.0):
             taxable_value = "N/A"
         cell.value = taxable_value
-        cell.alignment = Alignment(vertical='center')
+        cell.alignment = Alignment(vertical='center', horizontal='center')
         
         # Set row height based on content (minimum 25, add 15 for each extra line)
         dynamic_height = max(25, 15 + (line_count * 15))
