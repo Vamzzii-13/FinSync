@@ -33,13 +33,13 @@ function AppRouter() {
     localStorage.setItem("finsync_intro_seen", "true");
   };
 
-  if (isLoading) {
-    return <LoadingScreen />;
+  // Show intro animation first, regardless of auth state
+  if (showIntro) {
+    return <IntroAnimation onComplete={handleIntroComplete} />;
   }
 
-  // Only show intro on first-time app load (not after logout)
-  if (showIntro && !user) {
-    return <IntroAnimation onComplete={handleIntroComplete} />;
+  if (isLoading) {
+    return <LoadingScreen />;
   }
 
   return (
