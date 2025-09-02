@@ -15,11 +15,11 @@ def writer_agent(data: list, file_path: str):
     # Set optimal column widths for proper cell fitting
     column_widths = {
         'A': 8,   # S.No.
-        'B': 30,  # Vendor/Shop Name
+        'B': 35,  # Vendor/Shop Name (wider for multi-line)
         'C': 15,  # Date
         'D': 18,  # GSTIN
         'E': 20,  # Invoice No.
-        'F': 40,  # HSN Codes
+        'F': 45,  # HSN Codes (wider for multiple codes)
         'G': 12,  # CGST
         'H': 12,  # SGST
         'I': 12,  # IGST
@@ -43,15 +43,20 @@ def writer_agent(data: list, file_path: str):
         cell.value = row_idx - 1
         cell.alignment = Alignment(horizontal='center', vertical='center')
         
-        # Clean shop name - replace line breaks with space for single line display
+        # Handle multi-line shop name properly
         shop_name = record.get("Shop Name", "N/A")
         if isinstance(shop_name, str):
-            shop_name = shop_name.replace('\n', ' ').replace('\\n', ' ').strip()
+            # Keep line breaks but clean them up
+            shop_name = shop_name.replace('\\n', '\n').strip()
+            # Count lines to determine row height
+            line_count = shop_name.count('\n') + 1
+        else:
+            line_count = 1
         
         # Vendor/Shop Name with text wrapping (Column B)
         cell = ws.cell(row=row_idx, column=2)
         cell.value = shop_name
-        cell.alignment = Alignment(wrap_text=True, vertical='center')
+        cell.alignment = Alignment(wrap_text=True, vertical='top', horizontal='left')
         
         # Date (Column C)
         cell = ws.cell(row=row_idx, column=3)
@@ -77,21 +82,34 @@ def writer_agent(data: list, file_path: str):
         cell.value = invoice_value
         cell.alignment = Alignment(vertical='center')
         
-        # HSN Codes (Column F)
-        hsn_codes = record.get("HSN Code", "N/A")
+        # HSN Codes (Column F) - get from Items array
+        items = record.get("Items", [])
         cell = ws.cell(row=row_idx, column=6)
         
-        if isinstance(hsn_codes, list):
-            # Format as comma-separated in single line
-            formatted_hsn = ", ".join(str(code) for code in hsn_codes if code)
-            cell.value = formatted_hsn
-        elif isinstance(hsn_codes, str) and "," in hsn_codes:
-            formatted_hsn = ", ".join(code.strip() for code in hsn_codes.split(",") if code.strip())
-            cell.value = formatted_hsn
+        if items and isinstance(items, list):
+            # Extract HSN codes from Items array
+            hsn_codes = []
+            for item in items:
+                if isinstance(item, dict) and "HSN Code" in item:
+                    hsn_code = str(item["HSN Code"]).strip()
+                    if hsn_code and hsn_code != "0":
+                        hsn_codes.append(hsn_code)
+            
+            if hsn_codes:
+                # Format as comma-separated, wrapping every 3 codes to new line
+                formatted_codes = []
+                for i in range(0, len(hsn_codes), 3):
+                    chunk = hsn_codes[i:i+3]
+                    formatted_codes.append(", ".join(chunk))
+                cell.value = "\n".join(formatted_codes)
+            else:
+                cell.value = "N/A"
         else:
+            # Fallback to direct HSN Code field
+            hsn_codes = record.get("HSN Code", "N/A")
             cell.value = hsn_codes if hsn_codes else "N/A"
             
-        cell.alignment = Alignment(wrap_text=True, vertical='center')
+        cell.alignment = Alignment(wrap_text=True, vertical='top', horizontal='left')
         
         # Tax columns: CGST, SGST, IGST, Total Tax (Columns G, H, I, J)
         tax_data = [
@@ -116,8 +134,9 @@ def writer_agent(data: list, file_path: str):
         cell.value = taxable_value
         cell.alignment = Alignment(vertical='center')
         
-        # Set row height to accommodate wrapped text
-        ws.row_dimensions[row_idx].height = 30
+        # Set row height based on content (minimum 25, add 15 for each extra line)
+        dynamic_height = max(25, 15 + (line_count * 15))
+        ws.row_dimensions[row_idx].height = dynamic_height
 
     # Set header row height
     ws.row_dimensions[1].height = 25
