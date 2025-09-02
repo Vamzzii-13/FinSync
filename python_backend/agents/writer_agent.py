@@ -66,13 +66,8 @@ def writer_agent(data: list, file_path: str):
                         hsn_codes.append(hsn_code)
             
             if hsn_codes:
-                unique_codes = list(dict.fromkeys(hsn_codes))
-                if len(unique_codes) <= 2:
-                    hsn_line_count = 1
-                elif len(unique_codes) <= 6:
-                    hsn_line_count = (len(unique_codes) + 1) // 2  # Groups of 2
-                else:
-                    hsn_line_count = (len(unique_codes) + 2) // 3  # Groups of 3
+                # Calculate line count based on all codes (3 codes per line)
+                hsn_line_count = (len(hsn_codes) + 2) // 3
         
         # Vendor/Shop Name with text wrapping (Column B)
         cell = ws.cell(row=row_idx, column=2)
@@ -117,26 +112,13 @@ def writer_agent(data: list, file_path: str):
                         hsn_codes.append(hsn_code)
             
             if hsn_codes:
-                # Remove duplicates while preserving order
-                unique_codes = list(dict.fromkeys(hsn_codes))
-                
-                # Format for better readability - max 2 codes per line
-                if len(unique_codes) <= 2:
-                    cell.value = ", ".join(unique_codes)
-                elif len(unique_codes) <= 6:
-                    # Split into groups of 2 for medium lists
-                    formatted_codes = []
-                    for i in range(0, len(unique_codes), 2):
-                        chunk = unique_codes[i:i+2]
-                        formatted_codes.append(", ".join(chunk))
-                    cell.value = "\n".join(formatted_codes)
-                else:
-                    # For large lists, group by 3 per line
-                    formatted_codes = []
-                    for i in range(0, len(unique_codes), 3):
-                        chunk = unique_codes[i:i+3]
-                        formatted_codes.append(", ".join(chunk))
-                    cell.value = "\n".join(formatted_codes)
+                # Keep all HSN codes including duplicates, format for readability
+                # Group codes by 3 per line for optimal cell presentation
+                formatted_codes = []
+                for i in range(0, len(hsn_codes), 3):
+                    chunk = hsn_codes[i:i+3]
+                    formatted_codes.append(", ".join(chunk))
+                cell.value = "\n".join(formatted_codes)
             else:
                 cell.value = "N/A"
         else:
