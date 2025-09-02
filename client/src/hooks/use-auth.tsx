@@ -92,13 +92,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("finsync_user");
-    // Keep intro_seen flag so intro doesn't show again
-    const introSeen = localStorage.getItem("finsync_intro_seen");
-    localStorage.clear();
-    if (introSeen) {
-      localStorage.setItem("finsync_intro_seen", "true");
-    }
-    setLocation("/");
+    // Set flag to show intro animation on next load
+    localStorage.setItem("finsync_show_intro_on_logout", "true");
+    setLocation("/auth");
+    // Reload the page to trigger intro animation
+    window.location.reload();
   };
 
   return (

@@ -24,13 +24,16 @@ import { useEffect, useState } from "react";
 function AppRouter() {
   const { user, isLoading } = useAuth();
   const [showIntro, setShowIntro] = useState(() => {
-    // Only show intro if user has never seen it before
-    return !localStorage.getItem("finsync_intro_seen");
+    // Show intro on first visit OR after logout
+    const hasSeenIntro = localStorage.getItem("finsync_intro_seen");
+    const shouldShowOnLogout = localStorage.getItem("finsync_show_intro_on_logout");
+    return !hasSeenIntro || shouldShowOnLogout === "true";
   });
 
   const handleIntroComplete = () => {
     setShowIntro(false);
     localStorage.setItem("finsync_intro_seen", "true");
+    localStorage.removeItem("finsync_show_intro_on_logout");
   };
 
   // Show intro animation first, regardless of auth state
