@@ -29,7 +29,14 @@ function AppRouter() {
     const shouldShowOnLogout = localStorage.getItem("finsync_show_intro_on_logout");
     return !hasSeenIntro || shouldShowOnLogout === "true";
   });
-  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Watch for logout trigger to show intro
+  useEffect(() => {
+    const shouldShowOnLogout = localStorage.getItem("finsync_show_intro_on_logout");
+    if (shouldShowOnLogout === "true" && !user) {
+      setShowIntro(true);
+    }
+  }, [user]);
 
   const handleIntroComplete = () => {
     setShowIntro(false);

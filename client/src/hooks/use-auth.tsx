@@ -92,11 +92,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("finsync_user");
-    // Set flag to show intro animation on next load
+    // Set flag to show intro animation
     localStorage.setItem("finsync_show_intro_on_logout", "true");
-    
-    // Direct reload without loading state to trigger intro
-    window.location.reload();
+    setLocation("/");
   };
 
   return (
