@@ -41,11 +41,11 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
           runScene(sceneIndex + 1);
         }, timeline[sceneIndex].duration);
       } else {
-        // Start exit animation
+        // Start exit animation and complete smoothly
         setIsExiting(true);
         setTimeout(() => {
           onComplete();
-        }, 800);
+        }, 1000);
       }
     };
 

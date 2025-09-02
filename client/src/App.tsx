@@ -32,13 +32,9 @@ function AppRouter() {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleIntroComplete = () => {
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setShowIntro(false);
-      localStorage.setItem("finsync_intro_seen", "true");
-      localStorage.removeItem("finsync_show_intro_on_logout");
-      setIsTransitioning(false);
-    }, 300);
+    setShowIntro(false);
+    localStorage.setItem("finsync_intro_seen", "true");
+    localStorage.removeItem("finsync_show_intro_on_logout");
   };
 
   // Show intro animation first, regardless of auth state
@@ -46,8 +42,7 @@ function AppRouter() {
     return <IntroAnimation onComplete={handleIntroComplete} />;
   }
 
-  // Show smooth transition loading after intro
-  if (isTransitioning || isLoading) {
+  if (isLoading) {
     return <LoadingScreen />;
   }
 
